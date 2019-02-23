@@ -39,7 +39,6 @@ class ArticleController extends Controller
             $request->post('name'),
             $request->post('content'),
             $request->post('category_id'),
-            $request->post('image'),
             $request->post('url'),
             Auth::user()->id,
             $image
