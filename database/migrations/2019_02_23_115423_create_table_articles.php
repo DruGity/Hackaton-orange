@@ -24,9 +24,7 @@ class CreateTableArticles extends Migration
             $table->integer('category_id')->unsigned();
             $table->string('image');
             $table->boolean('is_active');
-            $table->integer('category_id');
-            $table->integer('user_create_id');
-            $table->integer('user_update_id');
+            $table->boolean('is_main');
             $table->string('url');
             $table->integer('user_create_id')->unsigned()->nullable();
             $table->integer('user_update_id')->unsigned()->nullable();
