@@ -66,7 +66,7 @@ class Article extends Model
         return self::with('user')->all();
     }
 
-    public static function getById($articleId)
+    public  function getById($articleId)
     {
         return self::with('user')->where('id', $articleId)->first();
     }
@@ -98,5 +98,10 @@ class Article extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class, 'article_id', 'id');
     }
 }

@@ -64,4 +64,11 @@ class ArticleController extends Controller
             ['message' => 'Article ' . $request->post('article_id') . 'successfully delete!'], 200
         );
     }
+
+    public function getCommentsByArticle($articleId, Article $articleModel)
+    {
+        $articleWithComments = $articleModel->getById($articleId)
+            ->load('comments.user', 'comments.article');
+        return response()->json($articleWithComments, 200);
+    }
 }

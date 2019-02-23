@@ -43,5 +43,5 @@ Route::post('/news/delete/{url}', 'ArticleController@deleteArticle')->name('dele
 
 /* Comments routes */
 Route::get('/comments', 'CommentController@getAllComments');
-Route::get('/comments/{articleId}', 'ArticleController@getCommentsByArticleId');
+Route::get('/comments/{articleId}', 'ArticleController@getCommentsByArticle');
 

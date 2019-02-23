@@ -10,7 +10,9 @@ class CommentController extends Controller
 {
     public function  getAllComments(Comments $commentsModel)
     {
-        return response()->json($commentsModel->getAllComments(), 200);
+        $comments = $commentsModel->getAllComments();
+
+        return response()->json($comments, 200);
     }
 
     public function getCommentById($id, Comments $commentsModel)
@@ -18,10 +20,6 @@ class CommentController extends Controller
         return response()->json($commentsModel->getById($id), 200);
     }
 
-    public function getCommentByArticleId($articleId, Comments $commentsModel)
-    {
-        return response()->json($commentsModel->getByArticleId($articleId), 200);
-    }
 
     public function store(Request $request, Comments $comments)
     {

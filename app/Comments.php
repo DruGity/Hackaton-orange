@@ -12,18 +12,35 @@ class Comments extends Model
 
     public function article()
     {
-        return $this->belongsTo(Articles::class, 'article_id', 'id');
+        return $this->belongsTo(Article::class, 'article_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id', 'id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
     public function getById($id)
     {
-        return self::find($id);
+        return self::find($id)->load( 'user', 'children');
     }
 
 
     public function getAllComments()
     {
-        return self::all();
+        return self::where('parent_id', '=', null)
+            ->get()
+            ->load( 'user' ,'children');
     }
 
 
