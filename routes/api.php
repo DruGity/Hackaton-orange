@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::get('/user', function (Request $request) {
-//    return dd(1);
-//});
 
 Route::get('/test', function(){
     return response()->json('fdjjdfjf');
@@ -31,3 +28,10 @@ Route::get('/categories/get/{id}', 'CategoryController@getById')->name('getCateg
 Route::get('categories/user/{id}', 'CategoryController@getByUserId')->name('getCategoryByUserId');
 Route::post('/categories/create', 'CategoryController@createCategory')->name('createCategory');
 Route::post('/categories/update/{id}', 'CategoryController@updateName')->name('updateCategoryName');
+
+
+/* Comments routes */
+Route::get('/comments', 'CommentController@getAllComments');
+Route::get('/comments/{id}', 'CommentController@getCommentById');
+Route::get('/comments/article/{articleId}', 'CommentController@getCommentByArticleId');
+
