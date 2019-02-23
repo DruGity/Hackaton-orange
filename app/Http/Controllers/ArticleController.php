@@ -58,6 +58,10 @@ class ArticleController extends Controller
 
     public static function updateArticle(Request $request, Article $articleModel)
     {
+        $isMain = $request->post('is_main');
+        if(isset($isMain) && $isMain == true) {
+            $articleModel->replaceIsMain();
+        }
         $articleModel->updateArticle(
             $request->post('article_id'),
             $request->post('name'),
