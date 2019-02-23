@@ -12,6 +12,17 @@ class Category extends Model
 
     public $table = 'categories';
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
+
     public static function getAll()
     {
         return self::all();
@@ -37,24 +48,19 @@ class Category extends Model
         self::create(['name' => $name, 'url' => $url, 'user_create_id' => $userId]);
     }
 
-    public static function updateName($categoryId, $newName, $userId)
+    public function updateCategory($categoryId, $newName, $userId)
     {
-        self::where('id', $categoryId)->update(['name' => $newName, 'user_update_id' => $userId]);
+        return self::where('id', $categoryId)
+            ->update([
+                'name' => $newName,
+                'user_update_id' => $userId
+            ]);
     }
 
-    public static function deleteCategory($categoryId)
+    public function deleteCategory($categoryId)
     {
         $category = self::find('id', $categoryId);
-        $category->delete();
+        return $category->delete();
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function articles()
-    {
-        return $this->hasMany(Article::class);
-    }
 }

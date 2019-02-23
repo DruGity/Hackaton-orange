@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Category;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -29,17 +30,32 @@ class CategoryController extends Controller
         return response()->json($categories, 200);
     }
 
-    public function createCategory(Request $request, Category $category)
+    public function createCategory(Request $request, Category $categoryModel)
     {
-        $category->createCategory($request->post('name'), $request->post('url'), $request->post('userId'));
+        $category = $categoryModel->createCategory(
+            $request->post('name'),
+            $request->post('url'),
+            Auth::user()->id
+        );
 
-        return response()->json(['message' => 'Category '. $request->post('name') .' successfully create!'], 201);
+        return response()->json($category, 201);
     }
 
-    public function updateName(Request $request, Category $category)
+    public function updateCategory(Request $request, Category $categoryModel)
     {
-        $category->updateName($request->post('categoryId'), $request->post('newName'), $request->post('userId'));
+        $category = $categoryModel->updateCategory(
+            $request->post('category_id'),
+            $request->post('name'),
+            Auth::user()->id
+        );
 
-        return response()->json(['message' => 'Category name successfully update to ' . $request->post('newName')]);
+        return response()->json($category, 200);
+    }
+
+    public function deleteCategory(Request $request, Category $categoryModel)
+    {
+        if($categoryModel->deleteCategory($request->post('id')))
+            return response()->json(null, 204);
+        return response()->json(null, 400);
     }
 }
