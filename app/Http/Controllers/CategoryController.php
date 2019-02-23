@@ -8,38 +8,38 @@ use App\Category;
 
 class CategoryController extends Controller
 {
-    public function all()
+    public function all(Category $category)
     {
-        $categories = Category::getAll();
+        $categories = $category->getAll();
 
         return response()->json(['categories' => $categories],200);
     }
 
-    public function getById(Request $request)
+    public function getById(Request $request, Category $category)
     {
-        $category = Category::getById($request->id);
+        $category = $category->getById($request->post('id'));
 
         return response()->json([$category], 200);
     }
 
-    public function getByUserId(Request $request)
+    public function getByUserId(Request $request, Category $category)
     {
-        $categories = Category::getByUserId($request->id);
+        $categories = $category->getByUserId($request->post('id'));
 
         return response()->json(['categories' => $categories], 200);
     }
 
-    public function createCategory(Request $request)
+    public function createCategory(Request $request, Category $category)
     {
-        Category::createCategory($request->name, $request->url, $request->userId);
+        $category->createCategory($request->post('name'), $request->post('url'), $request->post('userId'));
 
-        return response()->json(['message' => 'Category '. $request->name .' successfully create!'], 201);
+        return response()->json(['message' => 'Category '. $request->post('name') .' successfully create!'], 201);
     }
 
     public function updateName(Request $request)
     {
-        Category::updateName($request->categoryId, $request->newName, $request->userId);
+        Category::updateName($request->post('categoryId'), $request->post('newName'), $request->post('userId'));
 
-        return response()->json(['message' => 'Category name successfully update to ' . $request->newName]);
+        return response()->json(['message' => 'Category name successfully update to ' . $request->post('newName')]);
     }
 }
