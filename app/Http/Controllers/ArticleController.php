@@ -29,13 +29,20 @@ class ArticleController extends Controller
 
     public function createArticle(Request $request, Article $article)
     {
-        $article->createArticle(
+        $validator = $request->validate([
+            'photo' => 'file|image|required'
+        ]);
+
+        $image = $request->file('image');
+
+        Article::createArticle(
             $request->post('name'),
             $request->post('content'),
             $request->post('category_id'),
             $request->post('image'),
             $request->post('url'),
-            Auth::user()->id
+            Auth::user()->id,
+            $image
         );
 
         return response()->json(['message' => 'Article successfully added!'], 201);

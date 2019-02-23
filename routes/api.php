@@ -32,13 +32,15 @@ Route::get('/category/user/{name}', 'CategoryController@getByUserId')->name('get
 Route::post('/category/create', 'CategoryController@createCategory')->name('createCategory');
 Route::post('/category/update/{url}', 'CategoryController@updateName')->name('updateCategoryName');
 Route::post('/category/delete/{url}', 'CategoryController@deleteCategory')->name('deleteCategory');
+Route::post('/category/update', 'CategoryController@updateName')->name('updateCategoryName');
+Route::post('/category/delete', 'CategoryController@deleteCategory')->name('deleteCategory');
 
 /*Articles routes*/
 Route::get('/news', 'ArticleController@getArticles')->name('getArticles');
 Route::get('/news/{url}', 'ArticleController@getArticleById')->name('getArticleById');
 Route::post('/news/create', 'ArticleController@createArticle')->name('createArticle');
-Route::post('/news/update/{url}', 'ArticleController@updateArticle')->name('updateArticle');
-Route::post('/news/delete/{url}', 'ArticleController@deleteArticle')->name('deleteArticle');
+Route::post('/news/update', 'ArticleController@updateArticle')->name('updateArticle');
+Route::post('/news/delete', 'ArticleController@deleteArticle')->name('deleteArticle');
 
 
 /* Comments routes */
