@@ -35,6 +35,5 @@ Route::post('/category/update/{url}', 'CategoryController@updateName')->name('up
 
 /* Comments routes */
 Route::get('/comments', 'CommentController@getAllComments');
-Route::get('/comments/{id}', 'CommentController@getCommentById');
-Route::get('/comments/article/{articleId}', 'CommentController@getCommentByArticleId');
+Route::get('/comments/{articleId}', 'CommentController@getCommentByArticleId');
 
