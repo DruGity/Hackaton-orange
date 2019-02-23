@@ -39,3 +39,9 @@ Route::get('/news/{url}', 'ArticleController@getArticleById')->name('getArticleB
 Route::post('/news/create', 'ArticleController@createArticle')->name('createArticle');
 Route::post('/news/update/{url}', 'ArticleController@updateArticle')->name('updateArticle');
 Route::post('/news/delete/{url}', 'ArticleController@deleteArticle')->name('deleteArticle');
+
+
+/* Comments routes */
+Route::get('/comments', 'CommentController@getAllComments');
+Route::get('/comments/{articleId}', 'CommentController@getCommentByArticleId');
+
