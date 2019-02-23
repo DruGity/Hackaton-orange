@@ -28,22 +28,22 @@ class Category extends Model
         return self::all();
     }
 
-    public static function getById($categoryId)
+    public function getById($categoryId)
     {
         return self::where('id', $categoryId)->first();
     }
 
-    public static function getByName($categoryName)
+    public function getByName($categoryName)
     {
         return self::where('name', $categoryName)->first();
     }
 
-    public static function getByUserId($userId)
+    public function getByUserId($userId)
     {
         return self::where('user_create_id', $userId)->get();
     }
 
-    public static function createCategory($name, $url, $userId)
+    public function createCategory($name, $url, $userId)
     {
         self::create(['name' => $name, 'url' => $url, 'user_create_id' => $userId]);
     }
