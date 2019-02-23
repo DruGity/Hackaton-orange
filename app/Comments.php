@@ -20,6 +20,7 @@ class Comments extends Model
         return self::find($id);
     }
 
+
     public function getAllComments()
     {
         return self::all();

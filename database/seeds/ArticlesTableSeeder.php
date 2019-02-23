@@ -13,4 +13,6 @@ class ArticlesTableSeeder extends Seeder
     {
         factory(\App\Article::class, 30)->create();
     }
+
+
 }

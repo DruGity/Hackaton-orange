@@ -16,8 +16,8 @@ class Article extends Model
     const NOT_ACTIVE_ARTICLE = 1;
 
     public static function createArticle($articleName, $content,
-        $categoryId, $isActive = self::ACTIVE_ARTICLE,
-        $isMain = self::NOT_MAIN_ARTICLE, $image, $url, $userId)
+        $categoryId,$image, $url, $userId, $isActive = self::ACTIVE_ARTICLE,
+        $isMain = self::NOT_MAIN_ARTICLE)
     {
         self::create([
             'name' => $articleName,
@@ -31,15 +31,21 @@ class Article extends Model
         ]);
     }
 
-    public static function updateName($articleId, $newName)
+    public function updateArticle($articleId, $name, $content,$categoryId, $image,$url, $userId, $isActive, $isMain)
     {
-        self::where('id', $articleId)->update(['name' => $newName]);
+        self::where('id', $articleId)
+            ->update([
+                'name' => $name,
+                'content' => $content,
+                'category_id' => $categoryId,
+                'image' => $image,
+                'url' => $url,
+                'user_id' => $userId,
+                'is_active' => $isActive,
+                'is_main' => $isMain
+            ]);
     }
 
-    public static function updateContent($articleId, $content)
-    {
-        self::where('id', $articleId)->update(['content' => $content]);
-    }
 
     public static function deleteArticle($articleId)
     {

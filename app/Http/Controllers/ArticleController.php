@@ -22,7 +22,7 @@ class ArticleController extends Controller
 
     public function getArticleById(Request $request)
     {
-        $article = Article::getById($request->articaleId);
+        $article = Article::getById($request->post('article_id'));
 
         return response()->json([$article], 200);
     }
@@ -30,40 +30,38 @@ class ArticleController extends Controller
     public function createArticle(Request $request)
     {
         Article::createArticle(
-            $request->articleName,
-            $request->content,
-            $request->categoryId,
-            $request->image,
-            $request->url,
-            $request->userId
+            $request->post('name'),
+            $request->post('content'),
+            $request->post('category_id'),
+            $request->post('image'),
+            $request->post('url'),
+            Auth::user()->id
         );
 
         return response()->json(['message' => 'Article successfully added!'], 201);
     }
 
-    public static function updateArticle(Request $request)
+    public static function updateArticle(Request $request, Article $articleModel)
     {
-        switch ($request) {
-            case (isset($request->newName) && !empty($request->newName)):
-                Article::updateName($request->articleId, $request->newName);
-                break;
-
-            case (isset($request->content) && !empty($request->content)):
-                Articles::updateContent($request->articleId, $request->content);
-                break;
-
-            default:
-                return response()->json(['message' => 'Your data are not valid!']);
-                break;
-        }
+        $articleModel->updateArticle(
+            $request->post('article_id'),
+            $request->post('name'),
+            $request->post('content'),
+            $request->post('category_id'),
+            $request->post('image'),
+            $request->post('url'),
+            $request->post('user_id'),
+            $request->post('is_active'),
+            $request->post('is_main')
+        );
     }
 
     public function deleteArticle(Request $request)
     {
-        Article::deleteArticle($request->articleId);
+        Article::deleteArticle($request->post('article_id'));
 
         return response()->json(
-            ['message' => 'Article ' . $request->articleId . 'successfully delete!'], 200
+            ['message' => 'Article ' . $request->post('article_id') . 'successfully delete!'], 200
         );
     }
 }
