@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id'
+        'name', 'email', 'password', 'role'
     ];
 
     /**
@@ -31,7 +31,7 @@ class User extends Authenticatable
 
     public static function createUser($email, $password, $name, $roleId = 0)
     {
-        return self::create(['email' => $email, 'password' => $password, 'name' => $name, 'role_id' => $roleId]);
+        return self::create(['email' => $email, 'password' => $password, 'name' => $name, 'role' => $roleId]);
     }
 
     public static function setRole($userId, $roleId)
@@ -83,6 +83,11 @@ class User extends Authenticatable
     public function categories()
     {
         return $this->hasMany(Category::class);
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
     }
 
     public function role()
