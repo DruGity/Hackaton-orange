@@ -81,9 +81,9 @@ class ArticleController extends Controller
         );
     }
 
-    public function deleteArticle(Request $request, Article $article)
+    public function deleteArticle(Request $request, Article $articleModel)
     {
-        $article->deleteArticle($request->post('article_id'));
+        $articleModel->deleteArticle($request->post('article_id'));
 
         return response()->json(null, 204);
     }
