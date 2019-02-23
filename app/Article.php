@@ -11,9 +11,13 @@ class Article extends Model
     ];
 
     const MAIN_ARTICLE = 1;
+    const NOT_MAIN_ARTICLE = 0;
+    const ACTIVE_ARTICLE = 0;
+    const NOT_ACTIVE_ARTICLE = 1;
 
     public static function createArticle($articleName, $content,
-        $categoryId, $isActive, $image, $url, $userId)
+        $categoryId, $isActive = self::ACTIVE_ARTICLE,
+        $isMain = self::NOT_MAIN_ARTICLE, $image, $url, $userId)
     {
         self::create([
             'name' => $articleName,
@@ -21,6 +25,7 @@ class Article extends Model
             'category_id' => $categoryId,
             'image' => $image,
             'is_active' => $isActive,
+            'is_main' => $isMain,
             'url' => $url,
             'user_create_id' => $userId
         ]);
@@ -50,6 +55,7 @@ class Article extends Model
         return $articles;
     }
 
+    public static function getAll()
     {
         return self::with('user')->all();
     }
