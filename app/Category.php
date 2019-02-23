@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $fillable = [
-        'id', 'name', 'url', 'user_create_id', 'user_update_id'
+        'id', 'name', 'user_create_id', 'user_update_id'
     ];
 
     public $table = 'categories';
@@ -43,9 +43,11 @@ class Category extends Model
         return self::where('user_create_id', $userId)->get();
     }
 
-    public function createCategory($name, $url, $userId)
+    public function createCategory($name, $userId)
     {
-        self::create(['name' => $name, 'url' => $url, 'user_create_id' => $userId]);
+        self::create([
+            'name' => $name,
+            'user_create_id' => $userId]);
     }
 
     public function updateCategory($categoryId, $newName, $userId)
