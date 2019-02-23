@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Article extends Model
 {
     protected $fillable = [
-        'id', 'name', 'content', 'user_create_id', 'user_update_id'
+        'id', 'name', 'content', 'user_create_id', 'user_update_id', 'image_public_id'
     ];
 
     public $table = 'articles';
