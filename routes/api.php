@@ -21,6 +21,13 @@ Route::get('/test', function(){
     return response()->json('fdjjdfjf');
 });
 
-Route::get('news/', 'FixturesController@showNews');
+/*User routes*/
+Route::get('/user/get/{id}', 'UserController@getById')->name('getUserById');
+Route::post('/user/create', 'UserController@createUser')->name('createUser');
 
-Route::get('news/{id}', 'FixturesController@showOneNew');
+/*Category routes*/
+Route::get('/categories/all', 'CategoryController@all')->name('getAllCategories');
+Route::get('/categories/get/{id}', 'CategoryController@getById')->name('getCategoryById');
+Route::get('categories/user/{id}', 'CategoryController@getByUserId')->name('getCategoryByUserId');
+Route::post('/categories/create', 'CategoryController@createCategory')->name('createCategory');
+Route::post('/categories/update/{id}', 'CategoryController@updateName')->name('updateCategoryName');

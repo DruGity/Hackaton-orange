@@ -7,6 +7,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 
+use App\Role;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -17,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -28,4 +30,65 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function createUser($email, $password, $name, $roleId = 0)
+    {
+        return self::create(['email' => $email, 'password' => $password, 'name' => $name, 'role_id' => $roleId]);
+    }
+
+    public static function setRole($userId, $roleId)
+    {
+        self::where('id', $userId)->update(['role_id' => $roleId]);
+    }
+
+    public static function updateEmail($userId, $newEmail)
+    {
+        self::where('id', $userId)->update(['email' => $newEmail]);
+    }
+
+    public static function updateName($userId, $newName)
+    {
+        self::where('id', $userId)->update(['name' => $newName]);
+    }
+
+    public static function deleteUser($userId)
+    {
+        $user = self::find('id', $userId)
+        $user->delete();
+    }
+
+    public static function getAll()
+    {
+        return $users = self::with('role')->all();
+    }
+
+    public static function getById($id)
+    {
+        return $user = self::with('role')->where('id', $id)->first();
+    }
+
+    public static function getByEmail($email)
+    {
+        return $user = self::with('role')->where('email', $email)->first();
+    }
+
+    public static function getByName($name)
+    {
+        return $user = self::with('role')->where('name', $name)->first();
+    }
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }
