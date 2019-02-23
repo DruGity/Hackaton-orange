@@ -34,7 +34,6 @@ class CategoryController extends Controller
     {
         $category = $categoryModel->createCategory(
             $request->post('name'),
-            $request->post('url'),
             Auth::user()->id
         );
 
