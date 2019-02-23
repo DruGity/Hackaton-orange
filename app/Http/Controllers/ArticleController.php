@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Article;
 
@@ -11,13 +12,19 @@ class ArticleController extends Controller
     public function getArticles(Request $request, Article $article)
     {
         $articles = $article->getArticles(
-            $request->post('sortField'),
-            $request->post('sortType'),
-            $request->post('limit'),
-            $request->psot('categoryId')
+            $request->get('sort_field'),
+            $request->get('sort_type'),
+            $request->get('limit'),
+            $request->get('page')
         );
 
         return response()->json(['articles' => $articles], 200);
+    }
+
+    public function getArticlesByCategory($categoryId, Request $request, Article $articleModel)
+    {
+        $articles = $articleModel->getArticlesByCategory($categoryId);
+        return response()->json($articles, 200);
     }
 
     public function getArticleById(Request $request, Article $article)
@@ -35,14 +42,15 @@ class ArticleController extends Controller
 
         $image = $request->file('image');
 
-        Article::createArticle(
+        $article->createArticle(
             $request->post('name'),
             $request->post('content'),
             $request->post('category_id'),
-            $request->post('image'),
             $request->post('url'),
             Auth::user()->id,
-            $image
+            $image,
+            $request->post('is_active'),
+            $request->post('is_main')
         );
 
         return response()->json(['message' => 'Article successfully added!'], 201);

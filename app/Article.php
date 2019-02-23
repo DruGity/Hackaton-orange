@@ -17,9 +17,8 @@ class Article extends Model
     const ACTIVE_ARTICLE = 0;
     const NOT_ACTIVE_ARTICLE = 1;
 
-    public static function createArticle($articleName, $content,
-        $categoryId, $isActive = self::ACTIVE_ARTICLE,
-        $isMain = self::NOT_MAIN_ARTICLE, $url, $userId, $image)
+    public  function createArticle($articleName, $content,
+        $categoryId,  $url, $userId, $image, $isActive = self::ACTIVE_ARTICLE, $isMain = self::NOT_MAIN_ARTICLE)
     {
         $uploadImage = self::saveImageInClouder($image);
 
@@ -65,6 +64,12 @@ class Article extends Model
             ->orderBy($sortField, $sortType)->paginate($limit)->get();
 
         return $articles;
+    }
+
+    public function getArticlesByCategory(Category $category)
+    {
+        return self::where('category_id', '=', $category->id)
+            ->get();
     }
 
     public static function getAll()
