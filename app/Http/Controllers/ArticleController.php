@@ -71,9 +71,9 @@ class ArticleController extends Controller
         );
     }
 
-    public function deleteArticle(Request $request)
+    public function deleteArticle(Request $request, Article $article)
     {
-        Article::deleteArticle($request->post('article_id'));
+        $article->deleteArticle($request->post('article_id'));
 
         return response()->json(
             ['message' => 'Article ' . $request->post('article_id') . 'successfully delete!'], 200

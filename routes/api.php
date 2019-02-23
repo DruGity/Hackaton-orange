@@ -26,7 +26,7 @@ Route::get('/user/get/{id}', 'UserController@getById')->name('getUserById');
 Route::post('/user/create', 'UserController@createUser')->name('createUser');
 
 /*Category routes*/
-Route::get('/category/all', 'CategoryController@all')->name('getAllCategories');
+Route::get('/categories', 'CategoryController@all')->name('getAllCategories');
 Route::get('/category/{url}', 'CategoryController@getById')->name('getCategoryById');
 Route::get('/category/user/{name}', 'CategoryController@getByUserId')->name('getCategoryByUserId');
 Route::post('/category/create', 'CategoryController@createCategory')->name('createCategory');
@@ -38,8 +38,8 @@ Route::get('/news', 'ArticleController@getArticles')->name('getArticles');
 Route::get('/news/by-cat/{id}', 'ArticleController@getArticlesByCategory');
 Route::get('/news/{url}', 'ArticleController@getArticleById')->name('getArticleById');
 Route::post('/news/create', 'ArticleController@createArticle')->name('createArticle');
-Route::post('/news/update', 'ArticleController@updateArticle')->name('updateArticle');
-Route::post('/news/delete', 'ArticleController@deleteArticle')->name('deleteArticle');
+Route::put('/news/update', 'ArticleController@updateArticle')->name('updateArticle');
+Route::delete('/news/delete', 'ArticleController@deleteArticle')->name('deleteArticle');
 
 
 /* Comments routes */
