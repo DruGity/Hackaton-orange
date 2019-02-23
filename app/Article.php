@@ -65,6 +65,7 @@ class Article extends Model
     public function deleteArticle($articleId)
     {
         $article = $this->getById($articleId);
+        var_dump($article);die();
         if($article) {
             Cloudder::destroyImages([$article->image_public_id], []);
             $article->delete();
@@ -90,7 +91,7 @@ class Article extends Model
     {
         return DB::table($this->table)
             ->where('id', '=', $articleId)
-            ->first();
+            ->get();
     }
 
     public function getByName($articleName)
