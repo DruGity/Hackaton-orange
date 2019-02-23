@@ -36,9 +36,9 @@ class CategoryController extends Controller
         return response()->json(['message' => 'Category '. $request->post('name') .' successfully create!'], 201);
     }
 
-    public function updateName(Request $request)
+    public function updateName(Request $request, Category $category)
     {
-        Category::updateName($request->post('categoryId'), $request->post('newName'), $request->post('userId'));
+        $category->updateName($request->post('categoryId'), $request->post('newName'), $request->post('userId'));
 
         return response()->json(['message' => 'Category name successfully update to ' . $request->post('newName')]);
     }
