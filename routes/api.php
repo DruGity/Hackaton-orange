@@ -37,6 +37,7 @@ Route::post('/category/delete', 'CategoryController@deleteCategory')->name('dele
 
 /*Articles routes*/
 Route::get('/news', 'ArticleController@getArticles')->name('getArticles');
+Route::get('/news/by-cat/{id}', 'ArticleController@getArticlesByCategory');
 Route::get('/news/{url}', 'ArticleController@getArticleById')->name('getArticleById');
 Route::post('/news/create', 'ArticleController@createArticle')->name('createArticle');
 Route::post('/news/update', 'ArticleController@updateArticle')->name('updateArticle');
