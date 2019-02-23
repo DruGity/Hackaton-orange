@@ -42,7 +42,7 @@ class Category extends Model
 
     public static function deleteCategory($categoryId)
     {
-        $category = self::find('id', $categoryId);
+        $category = self::find($categoryId);
         $category->delete();
     }
 

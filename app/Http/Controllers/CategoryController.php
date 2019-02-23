@@ -36,10 +36,17 @@ class CategoryController extends Controller
         return response()->json(['message' => 'Category '. $request->post('name') .' successfully create!'], 201);
     }
 
-    public function updateName(Request $request)
+    public function updateName(Request $request, $id)
     {
-        Category::updateName($request->post('categoryId'), $request->post('newName'), $request->post('userId'));
+        Category::updateName($id, $request->post('newName'), $request->post('userId'));
 
-        return response()->json(['message' => 'Category name successfully update to ' . $request->post('newName')]);
+        return response()->json(['message' => 'Category was successfully update to ' . $request->post('newName')]);
+    }
+
+    public function deleteCategory($id)
+    {
+        Category::deleteCategory($id);
+
+        return response()->setStatusCode(204);
     }
 }
