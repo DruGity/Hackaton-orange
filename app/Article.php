@@ -88,8 +88,8 @@ class Article extends Model
 
     public function getById($articleId)
     {
-        return self::with('user')
-            ->where('id', $articleId)
+        return DB::table($this->table)
+            ->where('id', '=', $articleId)
             ->first();
     }
 
