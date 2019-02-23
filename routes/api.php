@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
+//Route::get('/user', function (Request $request) {
+//    return dd(1);
+//});
 
 Route::get('/test', function(){
     return response()->json('fdjjdfjf');
@@ -23,11 +26,11 @@ Route::get('/user/get/{id}', 'UserController@getById')->name('getUserById');
 Route::post('/user/create', 'UserController@createUser')->name('createUser');
 
 /*Category routes*/
-Route::get('/categories/all', 'CategoryController@all')->name('getAllCategories');
-Route::get('/categories/get/{id}', 'CategoryController@getById')->name('getCategoryById');
-Route::get('categories/user/{id}', 'CategoryController@getByUserId')->name('getCategoryByUserId');
-Route::post('/categories/create', 'CategoryController@createCategory')->name('createCategory');
-Route::post('/categories/update/{id}', 'CategoryController@updateName')->name('updateCategoryName');
+Route::get('/category/all', 'CategoryController@all')->name('getAllCategories');
+Route::get('/category/{url}', 'CategoryController@getById')->name('getCategoryById');
+Route::get('/category/user/{name}', 'CategoryController@getByUserId')->name('getCategoryByUserId');
+Route::post('/category/create', 'CategoryController@createCategory')->name('createCategory');
+Route::post('/category/update/{url}', 'CategoryController@updateName')->name('updateCategoryName');
 
 
 /* Comments routes */
