@@ -20,7 +20,7 @@ class Article extends Model
     const ACTIVE_ARTICLE = 0;
     const NOT_ACTIVE_ARTICLE = 1;
 
-    public  function createArticle(
+    public function createArticle(
         $articleName,
         $content,
         $categoryId,
@@ -29,8 +29,9 @@ class Article extends Model
         $image,
         $isActive = self::ACTIVE_ARTICLE,
         $isMain = self::NOT_MAIN_ARTICLE
-    ){
-        $uploadImage = self::saveImageInClouder($image);
+    )
+    {
+        $uploadImage = $this->saveImageInClouder($image);
 
         self::create([
             'name' => $articleName,
@@ -45,7 +46,7 @@ class Article extends Model
         ]);
     }
 
-    public function updateArticle($articleId, $name, $content,$categoryId, $image,$url, $userId, $isActive, $isMain)
+    public function updateArticle($articleId, $name, $content, $categoryId, $image, $url, $userId, $isActive, $isMain)
     {
         self::where('id', $articleId)
             ->update([
@@ -63,7 +64,7 @@ class Article extends Model
 
     public function deleteArticle($articleId)
     {
-        $article = self::find('id', $articleId);
+        $article = self::find($articleId);
         Cloudder::destroyImages([$article->image_public_id], []);
         $article->delete();
     }
@@ -83,19 +84,25 @@ class Article extends Model
             ->get();
     }
 
-    public  function getById($articleId)
+    public function getById($articleId)
     {
-        return self::with('user')->where('id', $articleId)->first();
+        return self::with('user')
+            ->where('id', $articleId)
+            ->first();
     }
 
     public function getByName($articleName)
     {
-        return self::with('user')->where('name', $articleName)->first();
+        return self::with('user')
+            ->where('name', $articleName)
+            ->first();
     }
 
     public function getByUser($userId)
     {
-        return self::with('user')->where('user_create_id', $userId)->get();
+        return self::with('user')
+            ->where('user_create_id', $userId)
+            ->get();
     }
 
     public function checkForIsMain($articleId)

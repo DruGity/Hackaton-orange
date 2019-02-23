@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Article;
+use App\Category;
 
 class ArticleController extends Controller
 {
@@ -21,15 +22,15 @@ class ArticleController extends Controller
         return response()->json($articles, 200);
     }
 
-    public function getArticlesByCategory($categoryId, Request $request, Article $articleModel)
+    public function getArticlesByCategory($categoryId, Article $articleModel)
     {
-        $articles = $articleModel->getArticlesByCategory($categoryId);
+        $articles = $articleModel->getArticlesByCategory(Category::find($categoryId));
         return response()->json($articles, 200);
     }
 
-    public function getArticleById(Request $request, Article $article)
+    public function getArticleById(Article $article, $id)
     {
-        $article = $article->getById($request->post('article_id'));
+        $article = $article->getById($id);
 
         return response()->json($article, 200);
     }
@@ -41,6 +42,11 @@ class ArticleController extends Controller
         ]);
 
         $image = $request->file('image');
+
+        $isMain = $request->post('is_main');
+        if(isset($isMain) && $isMain == true) {
+            $article->replaceIsMain();
+        }
 
         $article->createArticle(
             $request->post('name'),
@@ -56,9 +62,13 @@ class ArticleController extends Controller
         return response()->json(['message' => 'Article successfully added!'], 201);
     }
 
-    public static function updateArticle(Request $request, Article $articleModel)
+    public static function updateArticle(Request $request, Article $article)
     {
-        $articleModel->updateArticle(
+        $isMain = $request->post('is_main');
+        if(isset($isMain) && $isMain == true) {
+            $article->replaceIsMain();
+        }
+        $article->updateArticle(
             $request->post('article_id'),
             $request->post('name'),
             $request->post('content'),
@@ -75,9 +85,7 @@ class ArticleController extends Controller
     {
         $articleModel->deleteArticle($request->post('article_id'));
 
-        return response()->json(
-            ['message' => 'Article ' . $request->post('article_id') . 'successfully delete!'], 200
-        );
+        return response()->json(null, 204);
     }
 
     public function getCommentsByArticle($articleId, Article $articleModel)

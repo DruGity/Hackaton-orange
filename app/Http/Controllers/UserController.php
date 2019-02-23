@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function createUser(Request $request, User $user)
     {
-        $user->createUser($request->post('email'), $request->post('password'), $request->post('name'));
-        return response()->json([
-            'message' => 'User '. $request->post('name') .' successfully create!'
-        ], 201);
+        $user->createUser(
+            $request->post('email'),
+            Hash::make($request->post('password')),
+            $request->post('name'));
+        return response()->json($user, 201);
     }
 
     public function getById(Request $request, User $userModel)

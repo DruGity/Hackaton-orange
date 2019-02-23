@@ -12,25 +12,29 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+/*ADMIN routes*/
+Route::prefix('admin')->group(function () {
 
+    Route::post('/category', 'CategoryController@createCategory')->name('createCategory')->middleware('my.basic');
+    Route::put('/category', 'CategoryController@updateCategory')->name('updateCategoryName')->middleware('my.basic');
+    Route::delete('/category', 'CategoryController@deleteCategory')->name('deleteCategory')->middleware('my.basic');
 
-/*User routes*/
+    Route::post('/news/create', 'ArticleController@createArticle')->name('createArticle')->middleware('my.basic');
+    Route::put('/news/update', 'ArticleController@updateArticle')->name('updateArticle')->middleware('my.basic');
+    Route::delete('/news/delete', 'ArticleController@deleteArticle')->name('deleteArticle')->middleware('my.basic');
+});
+
+/*CLIENT routes*/
 Route::get('/user/get/{id}', 'UserController@getById')->name('getUserById');
 Route::post('/user/create', 'UserController@createUser')->name('createUser');
 
 /*Category routes*/
 Route::get('/categories', 'CategoryController@all')->name('getAllCategories');
-Route::post('/category', 'CategoryController@createCategory')->name('createCategory');
-Route::put('/category', 'CategoryController@updateCategory')->name('updateCategoryName');
-Route::delete('/category', 'CategoryController@deleteCategory')->name('deleteCategory');
 
 /*Articles routes*/
 Route::get('/news', 'ArticleController@getArticles')->name('getArticles');
 Route::get('/news/by-cat/{id}', 'ArticleController@getArticlesByCategory');
 Route::get('/news/{url}', 'ArticleController@getArticleById')->name('getArticleById');
-Route::post('/news/create', 'ArticleController@createArticle')->name('createArticle');
-Route::put('/news/update', 'ArticleController@updateArticle')->name('updateArticle');
-Route::delete('/news/delete', 'ArticleController@deleteArticle')->name('deleteArticle');
 
 
 /* Comments routes */

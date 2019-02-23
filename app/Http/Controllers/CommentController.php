@@ -33,9 +33,7 @@ class CommentController extends Controller
         $parentId = $request->post('parent_id');
         $comment = $comments->createComment($comment, $userId, $articleId, $parentId);
         if($comment) {
-            return response()->json([
-                'message' => 'add comment',
-            ], 200);
+            return response()->json($comment, 201);
         }else{
             return response()->json([
                 'message' => 'something went wrong'
@@ -43,4 +41,5 @@ class CommentController extends Controller
         }
 
     }
+    
 }
