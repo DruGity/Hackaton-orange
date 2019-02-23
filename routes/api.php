@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*User routes*/
+Route::get('/user/get/{id}', 'UserController@getById')->name('getUserById');
+Route::post('/user/create', 'UserController@createUser')->name('createUser');
+
+/*Category routes*/
+Route::get('/categories/all', 'CategoryController@all')->name('getAllCategories');
+Route::get('/categories/get/{id}', 'CategoryController@getById')->name('getCategoryById');
+Route::get('categories/user/{id}', 'CategoryController@getByUserId')->name('getCategoryByUserId');
+Route::post('/categories/create', 'CategoryController@createCategory')->name('createCategory');
+Route::post('/categories/update/{id}', 'CategoryController@updateName')->name('updateCategoryName');

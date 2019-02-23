@@ -18,9 +18,11 @@ class CreateArticlesTable extends Migration
             $table->string('name');
             $table->string('preview');
             $table->text('content');
-            $table->integer('category_id');
             $table->string('image');
             $table->boolean('is_active');
+            $table->integer('category_id');
+            $table->integer('user_create_id');
+            $table->integer('user_update_id');
             $table->string('url');
             $table->timestamps();
         });
