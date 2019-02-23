@@ -5,12 +5,15 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use Cloudder;
+use Illuminate\Support\Facades\DB;
 
 class Article extends Model
 {
     protected $fillable = [
         'id', 'name', 'content', 'user_create_id', 'user_update_id'
     ];
+
+    public $table = 'articles';
 
     const MAIN_ARTICLE = 1;
     const NOT_MAIN_ARTICLE = 0;
@@ -65,10 +68,11 @@ class Article extends Model
         $article->delete();
     }
 
-    public static function getArticles($sortField, $sortType, $limit, $categoryId)
+    public function getArticles($sortField, $sortType, $limit)
     {
-        $articles = self::with('category.id', $categoryId)
-            ->orderBy($sortField, $sortType)->paginate($limit)->get();
+        $articles = DB::table($this->table)
+            ->orderBy($sortField, $sortType)
+            ->paginate($limit);
 
         return $articles;
     }
@@ -77,11 +81,6 @@ class Article extends Model
     {
         return self::where('category_id', '=', $category->id)
             ->get();
-    }
-
-    public static function getAll()
-    {
-        return self::with('user')->all();
     }
 
     public  function getById($articleId)
