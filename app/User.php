@@ -29,7 +29,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function createUser($email, $password, $name, $roleId = 0)
+    public function createUser($email, $password, $name, $roleId = Role::USER)
     {
         return self::create(['email' => $email, 'password' => $password, 'name' => $name, 'role' => $roleId]);
     }

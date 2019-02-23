@@ -10,16 +10,12 @@ class Role extends Model
         'id', 'name', 'add_user_role', 'add_post', 'add_comment'
     ];
 
-    const GUEST = 0;
-    const USER = 1;
-    const ADMIN = 2;
+    const USER = 0;
+    const ADMIN = 1;
 
     public function getRoleName($roleId)
     {
         switch ($roleId) {
-            case ($roleId == self::GUEST):
-                return 'Guest';
-                break;
 
             case ($roleId == self::USER):
                 return 'User';
@@ -28,30 +24,11 @@ class Role extends Model
             case ($roleId == self::Admin):
                 return 'Admin';
                 break;
-
-            default:
-                return 'Unknown role!';
-                break;
-        }
     }
 
     public function checkIsAdmin($roleId)
     {
         if ($roleId == self::Admin) {
-            return true;
-        }
-    }
-
-    public function checkIsUser($roleId)
-    {
-        if ($roleId == self::USER) {
-            return true;
-        }
-    }
-
-    public function checkIsGuest($roleId)
-    {
-        if ($roleId == self::GUEST) {
             return true;
         }
     }
