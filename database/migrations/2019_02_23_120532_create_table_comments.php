@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentsTable extends Migration
+class CreateTableComments extends Migration
 {
     /**
      * Run the migrations.
@@ -16,9 +16,17 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('comment');
-            $table->integer('user_id');
-            $table->integer('article_id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('article_id')->unsigned();
             $table->timestamps();
+
+            $table->engine = 'InnoDB';
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreign('article_id')
+                ->references('id')->on('articles')->onDelete('cascade');
         });
     }
 
