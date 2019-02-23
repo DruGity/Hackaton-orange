@@ -48,7 +48,7 @@ class Category extends Model
         self::create(['name' => $name, 'url' => $url, 'user_create_id' => $userId]);
     }
 
-    public static function updateName($categoryId, $newName, $userId)
+    public function updateCategory($categoryId, $newName, $userId)
     {
         return self::where('id', $categoryId)
             ->update([
@@ -59,8 +59,8 @@ class Category extends Model
 
     public function deleteCategory($categoryId)
     {
-        $category = self::find($categoryId);
-        $category->delete();
+        $category = self::find('id', $categoryId);
+        return $category->delete();
     }
 
 }
