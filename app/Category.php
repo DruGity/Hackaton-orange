@@ -7,46 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $fillable = [
-        'id', 'name', 'url', 'user_create_id', 'user_update_id'
+        'id', 'name', 'user_create_id', 'user_update_id'
     ];
 
     public $table = 'categories';
 
-    public static function getAll()
-    {
-        return self::all();
-    }
-
-    public static function getById($categoryId)
-    {
-        return self::where('id', $categoryId)->first();
-    }
-
-    public static function getByName($categoryName)
-    {
-        return self::where('name', $categoryName)->first();
-    }
-
-    public static function getByUserId($userId)
-    {
-        return self::where('user_create_id', $userId)->get();
-    }
-
-    public static function createCategory($name, $url, $userId)
-    {
-        self::create(['name' => $name, 'url' => $url, 'user_create_id' => $userId]);
-    }
-
-    public static function updateName($categoryId, $newName, $userId)
-    {
-        self::where('id', $categoryId)->update(['name' => $newName, 'user_update_id' => $userId]);
-    }
-
-    public static function deleteCategory($categoryId)
-    {
-        $category = self::find($categoryId);
-        $category->delete();
-    }
 
     public function user()
     {
@@ -57,4 +22,47 @@ class Category extends Model
     {
         return $this->hasMany(Article::class);
     }
+
+    public static function getAll()
+    {
+        return self::all();
+    }
+
+    public function getById($categoryId)
+    {
+        return self::where('id', $categoryId)->first();
+    }
+
+    public function getByName($categoryName)
+    {
+        return self::where('name', $categoryName)->first();
+    }
+
+    public function getByUserId($userId)
+    {
+        return self::where('user_create_id', $userId)->get();
+    }
+
+    public function createCategory($name, $userId)
+    {
+        self::create([
+            'name' => $name,
+            'user_create_id' => $userId]);
+    }
+
+    public function updateCategory($categoryId, $newName, $userId)
+    {
+        return self::where('id', $categoryId)
+            ->update([
+                'name' => $newName,
+                'user_update_id' => $userId
+            ]);
+    }
+
+    public function deleteCategory($categoryId)
+    {
+        $category = self::find('id', $categoryId);
+        return $category->delete();
+    }
+
 }
