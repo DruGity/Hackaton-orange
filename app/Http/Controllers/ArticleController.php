@@ -14,8 +14,8 @@ class ArticleController extends Controller
         $articles = $article->getArticles(
             $request->get('sort_field'),
             $request->get('sort_type'),
-            $request->get('limit'),
-            $request->get('page')
+            $request->get('limit')
+//            $request->get('page')
         );
 
         return response()->json(['articles' => $articles], 200);
