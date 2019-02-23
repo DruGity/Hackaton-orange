@@ -18,7 +18,7 @@ class ArticleController extends Controller
 //            $request->get('page')
         );
 
-        return response()->json(['articles' => $articles], 200);
+        return response()->json($articles, 200);
     }
 
     public function getArticlesByCategory($categoryId, Request $request, Article $articleModel)
@@ -31,7 +31,7 @@ class ArticleController extends Controller
     {
         $article = $article->getById($request->post('article_id'));
 
-        return response()->json([$article], 200);
+        return response()->json($article, 200);
     }
 
     public function createArticle(Request $request, Article $article)
