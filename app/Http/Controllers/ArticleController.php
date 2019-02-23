@@ -43,6 +43,11 @@ class ArticleController extends Controller
 
         $image = $request->file('image');
 
+        $isMain = $request->post('is_main');
+        if(isset($isMain) && $isMain == true) {
+            $article->replaceIsMain();
+        }
+
         $article->createArticle(
             $request->post('name'),
             $request->post('content'),
@@ -57,13 +62,13 @@ class ArticleController extends Controller
         return response()->json(['message' => 'Article successfully added!'], 201);
     }
 
-    public static function updateArticle(Request $request, Article $articleModel)
+    public static function updateArticle(Request $request, Article $article)
     {
         $isMain = $request->post('is_main');
         if(isset($isMain) && $isMain == true) {
-            $articleModel->replaceIsMain();
+            $article->replaceIsMain();
         }
-        $articleModel->updateArticle(
+        $article->updateArticle(
             $request->post('article_id'),
             $request->post('name'),
             $request->post('content'),
