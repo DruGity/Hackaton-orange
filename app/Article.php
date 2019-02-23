@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Cloudder;
+
 class Article extends Model
 {
     protected $fillable = [
@@ -17,17 +19,20 @@ class Article extends Model
 
     public static function createArticle($articleName, $content,
         $categoryId, $isActive = self::ACTIVE_ARTICLE,
-        $isMain = self::NOT_MAIN_ARTICLE, $image, $url, $userId)
+        $isMain = self::NOT_MAIN_ARTICLE, $url, $userId, $image)
     {
+        $uploadImage = self::saveImageInClouder($image);
+
         self::create([
             'name' => $articleName,
             'content' => $content,
             'category_id' => $categoryId,
-            'image' => $image,
             'is_active' => $isActive,
             'is_main' => $isMain,
             'url' => $url,
-            'user_create_id' => $userId
+            'user_create_id' => $userId,
+            'image' => $uploadImage->getResult()['url'],
+            'image_public_id' => $uploadImage->getResult()['public_id']
         ]);
     }
 
@@ -44,13 +49,14 @@ class Article extends Model
     public static function deleteArticle($articleId)
     {
         $article = self::find('id', $articleId);
+        Cloudder::destroyImages([$article->image_public_id], []);
         $article->delete();
     }
 
     public static function getArticles($sortField, $sortType, $limit, $categoryId)
     {
         $articles = self::with('category.id', $categoryId)
-            ->orderBy($sortField, $sortType)->paginate($limit);
+            ->orderBy($sortField, $sortType)->paginate($limit)->get();
 
         return $articles;
     }
@@ -82,6 +88,11 @@ class Article extends Model
         if ($article->isMain === self::MAIN_ARTICLE) {
             return true;
         }
+    }
+
+    public static function saveImageInClouder($file)
+    {
+        return $res = Cloudder::upload($file->getPathName(), null, [], []);
     }
 
     public function category()
