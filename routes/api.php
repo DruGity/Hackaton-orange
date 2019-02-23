@@ -13,8 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return dd(1);
+//Route::get('/user', function (Request $request) {
+//    return dd(1);
+//});
+
+Route::get('/test', function(){
+    return response()->json('fdjjdfjf');
 });
 
 /*User routes*/
