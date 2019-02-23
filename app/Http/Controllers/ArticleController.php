@@ -85,9 +85,7 @@ class ArticleController extends Controller
     {
         $article->deleteArticle($request->post('article_id'));
 
-        return response()->json(
-            ['message' => 'Article ' . $request->post('article_id') . 'successfully delete!'], 200
-        );
+        return response()->json(null, 204);
     }
 
     public function getCommentsByArticle($articleId, Article $articleModel)
