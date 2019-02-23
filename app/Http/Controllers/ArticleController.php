@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Article;
+use App\Category;
 
 class ArticleController extends Controller
 {
@@ -21,15 +22,15 @@ class ArticleController extends Controller
         return response()->json($articles, 200);
     }
 
-    public function getArticlesByCategory($categoryId, Request $request, Article $articleModel)
+    public function getArticlesByCategory($categoryId, Article $articleModel)
     {
-        $articles = $articleModel->getArticlesByCategory($categoryId);
+        $articles = $articleModel->getArticlesByCategory(Category::find($categoryId));
         return response()->json($articles, 200);
     }
 
-    public function getArticleById(Request $request, Article $article)
+    public function getArticleById(Article $article, $id)
     {
-        $article = $article->getById($request->post('article_id'));
+        $article = $article->getById($id);
 
         return response()->json($article, 200);
     }
