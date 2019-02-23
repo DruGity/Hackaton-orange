@@ -10,6 +10,8 @@ class Category extends Model
         'id', 'name', 'url', 'user_create_id', 'user_update_id'
     ];
 
+    public $table = 'categories';
+
     public static function getAll()
     {
         return self::all();

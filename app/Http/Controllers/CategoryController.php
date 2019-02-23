@@ -12,21 +12,21 @@ class CategoryController extends Controller
     {
         $categories = $category->getAll();
 
-        return response()->json(['categories' => $categories],200);
+        return response()->json($categories,200);
     }
 
     public function getById(Request $request, Category $category)
     {
         $category = $category->getById($request->post('id'));
 
-        return response()->json([$category], 200);
+        return response()->json($category, 200);
     }
 
     public function getByUserId(Request $request, Category $category)
     {
         $categories = $category->getByUserId($request->post('id'));
 
-        return response()->json(['categories' => $categories], 200);
+        return response()->json($categories, 200);
     }
 
     public function createCategory(Request $request, Category $category)
