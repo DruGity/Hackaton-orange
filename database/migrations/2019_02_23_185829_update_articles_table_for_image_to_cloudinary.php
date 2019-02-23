@@ -13,7 +13,7 @@ class UpdateArticlesTableForImageToCloudinary extends Migration
      */
     public function up()
     {
-        Schema::table('cloudinary', function (Blueprint $table) {
+        Schema::table('articles', function (Blueprint $table) {
             $table->string('image_public_id');
         });
     }
@@ -25,8 +25,8 @@ class UpdateArticlesTableForImageToCloudinary extends Migration
      */
     public function down()
     {
-        Schema::table('cloudinary', function (Blueprint $table) {
-             $table->dropColumn('physical_path');
+        Schema::table('articles', function (Blueprint $table) {
+             $table->dropColumn('image_public_id');
         });
     }
 }
