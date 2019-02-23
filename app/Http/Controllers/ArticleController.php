@@ -8,28 +8,28 @@ use App\Article;
 
 class ArticleController extends Controller
 {
-    public function getArticles(Request $request)
+    public function getArticles(Request $request, Article $article)
     {
-        $articles = Article::getArticles(
-            $request->sortField,
-            $request->sortType,
-            $request->limit,
-            $request->categoryId
+        $articles = $article->getArticles(
+            $request->post('sortField'),
+            $request->post('sortType'),
+            $request->post('limit'),
+            $request->psot('categoryId')
         );
 
         return response()->json(['articles' => $articles], 200);
     }
 
-    public function getArticleById(Request $request)
+    public function getArticleById(Request $request, Article $article)
     {
-        $article = Article::getById($request->post('article_id'));
+        $article = $article->getById($request->post('article_id'));
 
         return response()->json([$article], 200);
     }
 
-    public function createArticle(Request $request)
+    public function createArticle(Request $request, Article $article)
     {
-        Article::createArticle(
+        $article->createArticle(
             $request->post('name'),
             $request->post('content'),
             $request->post('category_id'),
