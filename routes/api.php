@@ -19,10 +19,10 @@ Route::get('/user/get/{id}', 'UserController@getById')->name('getUserById');
 Route::post('/user/create', 'UserController@createUser')->name('createUser');
 
 /*Category routes*/
-Route::get('/category/all', 'CategoryController@all')->name('getAllCategories');
-Route::post('/category/create', 'CategoryController@createCategory')->name('createCategory');
-Route::put('/category/update', 'CategoryController@updateCategory')->name('updateCategoryName');
-Route::delete('/category/delete', 'CategoryController@deleteCategory')->name('deleteCategory');
+Route::get('/categories', 'CategoryController@all')->name('getAllCategories');
+Route::post('/category', 'CategoryController@createCategory')->name('createCategory');
+Route::put('/category', 'CategoryController@updateCategory')->name('updateCategoryName');
+Route::delete('/category', 'CategoryController@deleteCategory')->name('deleteCategory');
 
 /*Articles routes*/
 Route::get('/news', 'ArticleController@getArticles')->name('getArticles');
