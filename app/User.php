@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public static function deleteUser($userId)
     {
-        $user = self::find('id', $userId)
+        $user = self::find('id', $userId);
         $user->delete();
     }
 
