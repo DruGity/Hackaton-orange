@@ -29,48 +29,48 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public static function createUser($email, $password, $name, $roleId = 0)
+    public function createUser($email, $password, $name, $roleId = 0)
     {
         return self::create(['email' => $email, 'password' => $password, 'name' => $name, 'role' => $roleId]);
     }
 
-    public static function setRole($userId, $roleId)
+    public function setRole($userId, $roleId)
     {
         self::where('id', $userId)->update(['role_id' => $roleId]);
     }
 
-    public static function updateEmail($userId, $newEmail)
+    public function updateEmail($userId, $newEmail)
     {
         self::where('id', $userId)->update(['email' => $newEmail]);
     }
 
-    public static function updateName($userId, $newName)
+    public function updateName($userId, $newName)
     {
         self::where('id', $userId)->update(['name' => $newName]);
     }
 
-    public static function deleteUser($userId)
+    public function deleteUser($userId)
     {
         $user = self::find('id', $userId);
         $user->delete();
     }
 
-    public static function getAll()
+    public function getAll()
     {
         return $users = self::with('role')->all();
     }
 
-    public static function getById($id)
+    public function getById($id)
     {
         return $user = self::with('role')->where('id', $id)->first();
     }
 
-    public static function getByEmail($email)
+    public function getByEmail($email)
     {
         return $user = self::with('role')->where('email', $email)->first();
     }
 
-    public static function getByName($name)
+    public function getByName($name)
     {
         return $user = self::with('role')->where('name', $name)->first();
     }

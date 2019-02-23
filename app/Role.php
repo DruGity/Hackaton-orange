@@ -14,7 +14,7 @@ class Role extends Model
     const USER = 1;
     const ADMIN = 2;
 
-    public static function getRoleName($roleId)
+    public function getRoleName($roleId)
     {
         switch ($roleId) {
             case ($roleId == self::GUEST):
@@ -35,21 +35,21 @@ class Role extends Model
         }
     }
 
-    public static function checkIsAdmin($roleId)
+    public function checkIsAdmin($roleId)
     {
         if ($roleId == self::Admin) {
             return true;
         }
     }
 
-    public static function checkIsUser($roleId)
+    public function checkIsUser($roleId)
     {
         if ($roleId == self::USER) {
             return true;
         }
     }
 
-    public static function checkIsGuest($roleId)
+    public function checkIsGuest($roleId)
     {
         if ($roleId == self::GUEST) {
             return true;

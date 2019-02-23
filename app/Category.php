@@ -23,7 +23,7 @@ class Category extends Model
         return $this->hasMany(Article::class);
     }
 
-    public static function getAll()
+    public function getAll()
     {
         return self::all();
     }

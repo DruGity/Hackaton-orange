@@ -61,7 +61,7 @@ class Article extends Model
     }
 
 
-    public static function deleteArticle($articleId)
+    public function deleteArticle($articleId)
     {
         $article = self::find('id', $articleId);
         Cloudder::destroyImages([$article->image_public_id], []);
@@ -88,17 +88,17 @@ class Article extends Model
         return self::with('user')->where('id', $articleId)->first();
     }
 
-    public static function getByName($articleName)
+    public function getByName($articleName)
     {
         return self::with('user')->where('name', $articleName)->first();
     }
 
-    public static function getByUser($userId)
+    public function getByUser($userId)
     {
         return self::with('user')->where('user_create_id', $userId)->get();
     }
 
-    public static function checkForIsMain($articleId)
+    public function checkForIsMain($articleId)
     {
         $article = self::find('id', $articleId);
 
@@ -107,7 +107,7 @@ class Article extends Model
         }
     }
 
-    public static function saveImageInClouder($file)
+    public function saveImageInClouder($file)
     {
         return $res = Cloudder::upload($file->getPathName(), null, [], []);
     }

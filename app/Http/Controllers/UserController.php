@@ -16,9 +16,9 @@ class UserController extends Controller
         ], 201);
     }
 
-    public function getById(Request $request)
+    public function getById(Request $request, User $userModel)
     {
-        $user = User::getById($request->post('id'));
+        $user = $userModel->getById($request->post('id'));
         return response()->json([
             'name' => $user->name,
             'email' => $user->email,
