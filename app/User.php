@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role'
+        'name', 'email', 'password', 'role_id'
     ];
 
     /**
@@ -31,7 +31,7 @@ class User extends Authenticatable
 
     public static function createUser($email, $password, $name, $roleId = 0)
     {
-        return self::create(['email' => $email, 'password' => $password, 'name' => $name, 'role' => $roleId]);
+        return self::create(['email' => $email, 'password' => $password, 'name' => $name, 'role_id' => $roleId]);
     }
 
     public static function setRole($userId, $roleId)
