@@ -12,7 +12,7 @@ class CategoryController extends Controller
     {
         $categories = $category->getAll();
 
-        return response()->json(['categories' => $categories],200);
+        return response()->json([$categories],200);
     }
 
     public function getById(Request $request, Category $category)
