@@ -36,15 +36,21 @@ class Article extends Model
         ]);
     }
 
-    public static function updateName($articleId, $newName)
+    public function updateArticle($articleId, $name, $content,$categoryId, $image,$url, $userId, $isActive, $isMain)
     {
-        self::where('id', $articleId)->update(['name' => $newName]);
+        self::where('id', $articleId)
+            ->update([
+                'name' => $name,
+                'content' => $content,
+                'category_id' => $categoryId,
+                'image' => $image,
+                'url' => $url,
+                'user_id' => $userId,
+                'is_active' => $isActive,
+                'is_main' => $isMain
+            ]);
     }
 
-    public static function updateContent($articleId, $content)
-    {
-        self::where('id', $articleId)->update(['content' => $content]);
-    }
 
     public static function deleteArticle($articleId)
     {

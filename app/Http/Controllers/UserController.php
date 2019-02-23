@@ -8,17 +8,17 @@ use App\User;
 
 class UserController extends Controller
 {
-    public function createUser(Request $request)
+    public function createUser(Request $request, User $user)
     {
-        User::createUser($request->email, $request->password, $request->name);
+        $user->createUser($request->post('email'), $request->post('password'), $request->post('name'));
         return response()->json([
-            'message' => 'User '. $request->name .' successfully create!'
+            'message' => 'User '. $request->post('name') .' successfully create!'
         ], 201);
     }
 
     public function getById(Request $request)
     {
-        $user = User::getById($request->id);
+        $user = User::getById($request->post('id'));
         return response()->json([
             'name' => $user->name,
             'email' => $user->email,
