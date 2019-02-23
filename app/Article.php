@@ -17,9 +17,16 @@ class Article extends Model
     const ACTIVE_ARTICLE = 0;
     const NOT_ACTIVE_ARTICLE = 1;
 
-    public  function createArticle($articleName, $content,
-        $categoryId,  $url, $userId, $image, $isActive = self::ACTIVE_ARTICLE, $isMain = self::NOT_MAIN_ARTICLE)
-    {
+    public  function createArticle(
+        $articleName,
+        $content,
+        $categoryId,
+        $url,
+        $userId,
+        $image,
+        $isActive = self::ACTIVE_ARTICLE,
+        $isMain = self::NOT_MAIN_ARTICLE
+    ){
         $uploadImage = self::saveImageInClouder($image);
 
         self::create([
