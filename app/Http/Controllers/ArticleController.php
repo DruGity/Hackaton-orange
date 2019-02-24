@@ -55,16 +55,17 @@ class ArticleController extends Controller
             $request->post('content'),
             $request->post('category_id'),
             $request->post('url'),
-            Auth::user()->id,
+            null,
+//            Auth::user()->id,
             $request->post('image'),
-            $request->post('is_active'),
-            $request->post('is_main')
+            true,
+            false
         );
 
         return response()->json(['message' => 'Article successfully added!'], 201);
     }
 
-    public static function updateArticle(Request $request, Article $article)
+    public function updateArticle(Request $request, Article $article)
     {
         $isMain = $request->post('is_main');
         if(isset($isMain) && $isMain == true) {
@@ -75,17 +76,21 @@ class ArticleController extends Controller
             $request->post('name'),
             $request->post('content'),
             $request->post('category_id'),
-            $request->post('image'),
             $request->post('url'),
-            Auth::user()->id,
-            $request->post('is_active'),
-            $request->post('is_main')
+            null,
+            $request->post('image')
+//            $request->post('url'),
+//            Auth::user()->id
+//            $request->post('is_active'),
+//            $request->post('is_main')
         );
     }
 
     public function deleteArticle(Request $request, Article $articleModel)
     {
-        $articleModel->deleteArticle((int)$request->post('article_id'));
+        $id = $request->post('article_id');
+        var_dump($request->post());die();
+        $articleModel->deleteArticle($id);
 
         return response()->json(null, 204);
     }
