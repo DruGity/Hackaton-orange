@@ -125,7 +125,6 @@ class Article extends Model
     public function getLastAddedArticle()
     {
         return $article = DB::table($this->table)
-            ->where('is_main', '=', true)
             ->orderBy('id', 'desc')
             ->first();
     }
