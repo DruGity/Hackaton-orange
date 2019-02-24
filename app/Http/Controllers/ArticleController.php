@@ -35,6 +35,14 @@ class ArticleController extends Controller
         return response()->json($article, 200);
     }
 
+    public function getArticleByUrl($url, Article $articleModel)
+    {
+        $article = $articleModel->getByUrl($url);
+        if($article)
+            return response()->json($article, 200);
+        return response()->json(null, 200);
+    }
+
     public function createArticle(Request $request, Article $article)
     {
         $isMain = $request->post('is_main');
@@ -78,7 +86,7 @@ class ArticleController extends Controller
 
     public function deleteArticle(Request $request, Article $articleModel)
     {
-        $articleModel->deleteArticle($request->post('article_id'));
+        $articleModel->deleteArticle((int)$request->post('article_id'));
 
         return response()->json(null, 204);
     }

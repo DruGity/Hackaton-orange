@@ -9,17 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function createUser(Request $request, User $user)
-    {
-        $user->createUser(
-            $request->post('email'),
-            Hash::make($request->post('password')),
-            $request->post('name'),
-            $request->post('image')
-        );
-        return response()->json($user, 201);
-    }
-
     public function getById(Request $request, User $userModel)
     {
         $user = $userModel->getById($request->post('id'));

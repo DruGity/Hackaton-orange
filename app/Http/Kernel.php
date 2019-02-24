@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\BasicAuth;
+use App\Http\Middleware\checkForAdminRoleExist;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,7 +64,9 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'my.basic' => BasicAuth::class,
-        'user.exist' => CheckForUserExist::class
+        'user.exist' => CheckForUserExist::class,
+        'my.basic' => BasicAuth::class,
+        'isAdmin' => checkForAdminRoleExist::class
     ];
 
     /**

@@ -76,15 +76,18 @@ class Article extends Model
     public function deleteArticle($articleId)
     {
         $article = self::find($articleId);
-        Cloudder::destroyImages([$article->image_public_id], []);
-        $article->delete();
+        if($article) {
+//            Cloudder::destroyImages([$article->image_public_id], []);
+            $article->delete();
+        }
     }
 
     public function getArticles($sortField, $sortType, $limit)
     {
         $articles = DB::table($this->table)
             ->orderBy($sortField, $sortType)
-            ->paginate($limit);
+            ->limit($limit)->get();
+           /* ->paginate($limit);*/
 
         return $articles;
     }
@@ -97,9 +100,9 @@ class Article extends Model
 
     public function getById($articleId)
     {
-        return self::with('user')
-            ->where('id', $articleId)
-            ->first();
+        return DB::table($this->table)
+            ->where('id', '=', $articleId)
+            ->get();
     }
 
     public function getByName($articleName)
@@ -116,12 +119,21 @@ class Article extends Model
             ->get();
     }
 
-    public function checkForIsMain($articleId)
+    public function getByUrl($url)
     {
-        $article = self::find('id', $articleId);
+        return self::with('user')
+            ->where('url', $url)
+            ->get();
+    }
 
-        if ($article->isMain === self::MAIN_ARTICLE) {
-            return true;
+    public function replaceIsMain()
+    {
+        $articles = self::where('is_main', '=', true)->get();
+
+        foreach ($articles as $article) {
+            $article->update([
+                'is_main' => false
+            ]);
         }
     }
 
