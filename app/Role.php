@@ -24,17 +24,20 @@ class Role extends Model
             case ($roleId == self::Admin):
                 return 'Admin';
                 break;
-    }
-
-    public function checkIsAdmin($roleId)
-    {
-        if ($roleId == self::Admin) {
-            return true;
         }
-    }
 
-    public function users()
-    {
-        return $this->hasMany(User::class);
+        public
+        function checkIsAdmin($roleId)
+        {
+            if ($roleId == self::Admin) {
+                return true;
+            }
+        }
+
+        public
+        function users()
+        {
+            return $this->hasMany(User::class);
+        }
     }
 }
