@@ -99,4 +99,10 @@ class ArticleController extends Controller
         }
         return response()->json(null, 204);
     }
+    public function setMain($id, Article $articleModel)
+    {
+        $article = $articleModel->setMain($id);
+
+        return response()->json($article, 200);
+    }
 }
