@@ -16,7 +16,6 @@ class ArticleController extends Controller
             $request->get('sort_field'),
             $request->get('sort_type'),
             $request->get('limit')
-//            $request->get('page')
         );
 
         return response()->json($articles, 200);
@@ -28,7 +27,6 @@ class ArticleController extends Controller
             $request->get('sort_field'),
             $request->get('sort_type'),
             $request->get('limit')
-//            $request->get('page')
         );
 
         return response()->json($articles, 200);
@@ -99,10 +97,6 @@ class ArticleController extends Controller
             $request->post('category_id'),
             $request->post('image'),
             null
-//            $request->post('url'),
-//            Auth::user()->id
-//            $request->post('is_active'),
-//            $request->post('is_main')
         );
     }
 
