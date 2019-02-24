@@ -37,11 +37,10 @@ class Article extends Model
         $userId,
         $image,
         $isActive = self::ACTIVE_ARTICLE,
-        $isMain = self::NOT_MAIN_ARTICLE,
-        Helper $helper
+        $isMain = self::NOT_MAIN_ARTICLE
     )
     {
-        $uploadImage = $helper->saveImageInClouder($image);
+        $uploadImage = CloudinaryHelper::saveImageInClouder($image);
 
         self::create([
             'name' => $articleName,
@@ -76,7 +75,7 @@ class Article extends Model
     {
         $article = self::find($articleId);
         if($article) {
-//            Cloudder::destroyImages([$article->image_public_id], []);
+            CloudinaryHelper::deleteImageFromCloudinary($article->image_public_id);
             $article->delete();
         }
     }
