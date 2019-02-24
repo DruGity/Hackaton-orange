@@ -116,6 +116,7 @@ class Article extends Model
     {
         $articles = DB::table($this->table)
             ->orderBy($sortField, $sortType)
+            ->where('is_main', '!=', true)
             ->limit($limit)->get();
            /* ->paginate($limit);*/
 
