@@ -28,17 +28,17 @@ class Role extends Model
     }
 
 
-        public function checkIsAdmin($roleId)
-        {
-            if ($roleId == self::Admin) {
-                return true;
-            }
+    public static function checkIsAdmin($roleId)
+    {
+        if ($roleId == self::ADMIN) {
+            return true;
         }
+    }
 
 
-        public function users()
-        {
-            return $this->hasMany(User::class);
-        }
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 
 }
