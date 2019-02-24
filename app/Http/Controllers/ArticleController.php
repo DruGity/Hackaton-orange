@@ -39,7 +39,7 @@ class ArticleController extends Controller
     {
         $article = $articleModel->getMain();
         if($article){
-            return response()->json($article, 200);
+            return response()->json([$article], 200);
         }
         return response()->json(null, 200);
     }
