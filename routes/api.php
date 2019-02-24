@@ -33,6 +33,8 @@ Route::prefix('admin')->group(function () {
 /*CLIENT routes*/
 Route::get('/user/get/{id}', 'UserController@getById')->name('getUserById');
 Route::post('/user/register', 'AuthController@registerUser')->name('registerUser')->middleware(['user.exist']);
+Route::post('/user/login', 'AuthController@loginUser')->name('loginUser')->middleware(['my.basic']);
+
 
 /*Category routes*/
 Route::get('/categories', 'CategoryController@all')->name('getAllCategories');

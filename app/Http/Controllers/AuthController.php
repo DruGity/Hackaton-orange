@@ -24,4 +24,10 @@ class AuthController extends Controller
         );
         return response()->json($user, 201);
     }
+
+    public function loginUser(Request $request, User $userModel)
+    {
+        $user = $userModel->getByEmail($request->post('email'));
+        return response()->json($user, 200);
+    }
 }
