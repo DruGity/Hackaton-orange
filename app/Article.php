@@ -153,4 +153,18 @@ class Article extends Model
     {
         return $this->hasMany(Comments::class, 'article_id', 'id');
     }
+
+    public function setMain($id)
+    {
+        $this->replaceIsMain();
+        $article = self::find($id);
+        if($article) {
+            $article->update([
+                'is_main' => true
+            ]);
+
+            return $article;
+        }
+        return null;
+    }
 }
