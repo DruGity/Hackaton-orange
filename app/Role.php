@@ -25,19 +25,20 @@ class Role extends Model
                 return 'Admin';
                 break;
         }
+    }
 
-        public
-        function checkIsAdmin($roleId)
+
+        public function checkIsAdmin($roleId)
         {
             if ($roleId == self::Admin) {
                 return true;
             }
         }
 
-        public
-        function users()
+
+        public function users()
         {
             return $this->hasMany(User::class);
         }
-    }
+
 }
