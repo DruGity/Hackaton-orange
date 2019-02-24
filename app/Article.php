@@ -60,20 +60,16 @@ class Article extends Model
     {
         $article = self::where('id', $articleId)->first();
 
-        if (! $name && empty($name)) {
+        if (empty($name)) {
             $name = $article->name;
         }
 
-        if (! $content && empty($content)) {
+        if (empty($content)) {
             $content = $article->content;
         }
 
-        if (! $image && empty($image)) {
+        if (empty($image)) {
             $image = $article->image;
-        }
-
-        if (! $url && empty($url)) {
-            $url = $article->url;
         }
 
         $article->update([
