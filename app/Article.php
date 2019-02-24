@@ -68,6 +68,11 @@ class Article extends Model
             ]);
     }
 
+    public function changeIsActive($articleId)
+    {
+        self::where('id', $articleId)->update(['is_active' => ! 'is_active']);
+    }
+
 
     public function deleteArticle($articleId)
     {
