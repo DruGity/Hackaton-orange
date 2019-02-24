@@ -83,8 +83,11 @@ class Article extends Model
 
     public function getMain()
     {
-        $article = self::where('is_main', true)
+        $article = DB::table($this->table)
+            ->where('is_main', '=', true)
+            ->orderBy('id', 'desc')
             ->first();
+
         if(!$article)
             $article = $this->getLastAddedArticle();
 
