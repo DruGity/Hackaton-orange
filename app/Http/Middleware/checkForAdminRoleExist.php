@@ -17,10 +17,14 @@ class checkForAdminRoleExist
      */
     public function handle($request, Closure $next)
     {
-        $userRole = Auth::user()->role_id;
+        $user = Auth::user();
 
-        if (Role::checkIsAdmin($userRole)) {
-            return $next($request);
+        if($user) {
+            $userRole = $user->role_id;
+
+            if (Role::checkIsAdmin($userRole)) {
+                return $next($request);
+            }
         }
 
         return response()->json(null, 403);
