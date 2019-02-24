@@ -66,7 +66,7 @@ class Kernel extends HttpKernel
         'my.basic' => BasicAuth::class,
         'user.exist' => \App\Http\Middleware\CheckForUserExist::class,
         'my.basic' => BasicAuth::class,
-        'isAdmin' => checkForAdminRoleExist::class
+        'isAdmin' => \App\Http\Middleware\checkForAdminRoleExist::class
     ];
 
     /**

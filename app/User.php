@@ -31,8 +31,7 @@ class User extends Authenticatable
 
     public function createUser($email, $password, $name, $image, $roleId = Role::USER)
     {
-        $helper = new Helper();
-        $uploadImage = $helper->saveImageInClouder($image);
+        $uploadImage = CloudinaryHelper::saveImageInClouder($image);
 
         return self::create([
             'email' => $email,
@@ -62,7 +61,11 @@ class User extends Authenticatable
     public function deleteUser($userId)
     {
         $user = self::find('id', $userId);
-        $user->delete();
+
+        if ($user) {
+            CloudinaryHelper::deleteImageFromCloudinary($user->image_public_id);
+            $user->delete();
+        }
     }
 
     public function getAll()
