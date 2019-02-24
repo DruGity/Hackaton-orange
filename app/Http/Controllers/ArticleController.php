@@ -22,6 +22,18 @@ class ArticleController extends Controller
         return response()->json($articles, 200);
     }
 
+    public function getAllArticles(Request $request, Article $article)
+    {
+        $articles = $article->getAllArticles(
+            $request->get('sort_field'),
+            $request->get('sort_type'),
+            $request->get('limit')
+//            $request->get('page')
+        );
+
+        return response()->json($articles, 200);
+    }
+
     public function getArticlesByCategory($categoryId, Article $articleModel)
     {
         $articles = $articleModel->getArticlesByCategory(Category::find($categoryId));
