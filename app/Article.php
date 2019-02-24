@@ -89,9 +89,7 @@ class Article extends Model
 
     public function getById($articleId)
     {
-        return DB::table($this->table)
-            ->where('id', '=', $articleId)
-            ->get();
+        return self::find($articleId);
     }
 
     public function getByName($articleName)
