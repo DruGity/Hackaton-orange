@@ -83,10 +83,7 @@ class Article extends Model
 
     public function getMain()
     {
-        $article = DB::table($this->table)
-            ->where('is_main', '=', true)
-            ->orderBy('id', 'desc')
-            ->first();
+        $article = self::where('is_main', true)->first();
 
         if(!$article)
             $article = $this->getLastAddedArticle();
@@ -127,8 +124,10 @@ class Article extends Model
 
     public function getLastAddedArticle()
     {
-        return self::select('*')->orderBy('desc')
-            ->limit(1)->get();
+        return $article = DB::table($this->table)
+            ->where('is_main', '=', true)
+            ->orderBy('id', 'desc')
+            ->first();
     }
 
     public function getById($articleId)
