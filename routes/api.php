@@ -27,7 +27,7 @@ use Illuminate\Http\Request;
 
 /*CLIENT routes*/
 Route::get('/user/get/{id}', 'UserController@getById')->name('getUserById');
-Route::post('/user/create', 'UserController@createUser')->name('createUser');
+Route::post('/user/register', 'AuthController@registerUser')->name('registerUser');
 
 /*Category routes*/
 Route::get('/categories', 'CategoryController@all')->name('getAllCategories');

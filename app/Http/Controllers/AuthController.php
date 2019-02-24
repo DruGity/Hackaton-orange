@@ -13,4 +13,13 @@ class AuthController extends Controller
         'email' => 'required|email|unique:users',
         'password' => 'required|min:6'
     ];
+
+    public function registerUser(Request $request, User $user)
+    {
+        $user->createUser(
+            $request->post('email'),
+            Hash::make($request->post('password')),
+            $request->post('name'));
+        return response()->json($user, 201);
+    }
 }
