@@ -93,8 +93,11 @@ class ArticleController extends Controller
 
     public function getCommentsByArticle($articleId, Article $articleModel)
     {
-        $articleWithComments = $articleModel->getById($articleId)
-            ->load('comments.user');
-        return response()->json($articleWithComments, 200);
+        $articleWithComments = $articleModel->getById($articleId);
+        if($articleWithComments){
+            $articleWithComments->load('comments.user');
+            return response()->json($articleWithComments, 200);
+        }
+        return response()->json(null, 204);
     }
 }

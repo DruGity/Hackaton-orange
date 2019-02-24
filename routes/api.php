@@ -41,4 +41,4 @@ Route::get('/news/{url}', 'ArticleController@getArticleByUrl')->name('getArticle
 /* Comments routes */
 Route::get('/comments', 'CommentController@getAllComments');
 Route::get('/comments/{articleId}', 'ArticleController@getCommentsByArticle');
-
+Route::post('/comment', 'CommentController@store')->middleware('my.basic');
