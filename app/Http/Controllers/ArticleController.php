@@ -35,6 +35,14 @@ class ArticleController extends Controller
         return response()->json($article, 200);
     }
 
+    public function getArticleByUrl($url, Article $articleModel)
+    {
+        $article = $articleModel->getByUrl($url);
+        if($article)
+            return response()->json($article, 200);
+        return response()->json(null, 200);
+    }
+
     public function createArticle(Request $request, Article $article)
     {
         $validator = $request->validate([

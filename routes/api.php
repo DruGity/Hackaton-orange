@@ -35,7 +35,7 @@ Route::get('/categories', 'CategoryController@all')->name('getAllCategories');
 /*Articles routes*/
 Route::get('/news', 'ArticleController@getArticles')->name('getArticles');
 Route::get('/news/by-cat/{id}', 'ArticleController@getArticlesByCategory');
-Route::get('/news/{url}', 'ArticleController@getArticleById')->name('getArticleById');
+Route::get('/news/{url}', 'ArticleController@getArticleByUrl')->name('getArticleByUrl');
 
 
 /* Comments routes */
