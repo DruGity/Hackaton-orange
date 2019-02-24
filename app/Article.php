@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Cloudder;
 use Illuminate\Support\Facades\DB;
 
 class Article extends Model
