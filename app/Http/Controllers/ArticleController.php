@@ -94,11 +94,12 @@ class ArticleController extends Controller
         );
     }
 
-    public function changeIsActiveStatus(Request $request, Article $articleModel)
+    public function changeIsActiveStatus($id, Request $request, Article $articleModel)
     {
-        $articleModel->changeIsActive($request->post('article_id'));
-
-        return response()->json('Status successfully changed!', 200);
+        if($articleModel->changeIsActive($id))
+            return response()->json('Status successfully changed!', 200);
+        else
+            return response()->json(null,400);
     }
 
     public function deleteArticle($articleId,Request $request, Article $articleModel)
