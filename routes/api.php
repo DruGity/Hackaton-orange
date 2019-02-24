@@ -27,7 +27,7 @@ Route::prefix('admin')->group(function () {
 
 /*CLIENT routes*/
 Route::get('/user/get/{id}', 'UserController@getById')->name('getUserById');
-Route::post('/user/register', 'AuthController@registerUser')->name('registerUser')->middleware(['my.basic', 'user.exist']);
+Route::post('/user/register', 'AuthController@registerUser')->name('registerUser')->middleware(['user.exist']);
 
 /*Category routes*/
 Route::get('/categories', 'CategoryController@all')->name('getAllCategories');
@@ -41,4 +41,4 @@ Route::get('/news/{url}', 'ArticleController@getArticleByUrl')->name('getArticle
 /* Comments routes */
 Route::get('/comments', 'CommentController@getAllComments');
 Route::get('/comments/{articleId}', 'ArticleController@getCommentsByArticle');
-Route::post('/comment', 'CommentController@store')->middleware('my.basic');
+Route::post('/comment', 'CommentController@store')->middleware(['my.basic', 'isUser']);
