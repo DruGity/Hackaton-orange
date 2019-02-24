@@ -66,7 +66,7 @@ class Article extends Model
     {
         $article = self::find($articleId);
         if($article) {
-            Cloudder::destroyImages([$article->image_public_id], []);
+//            Cloudder::destroyImages([$article->image_public_id], []);
             $article->delete();
         }
     }
