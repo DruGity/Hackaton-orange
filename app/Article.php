@@ -108,12 +108,14 @@ class Article extends Model
             ->get();
     }
 
-    public function checkForIsMain($articleId)
+    public function replaceIsMain()
     {
-        $article = self::find('id', $articleId);
+        $articles = self::where('is_main', '=', true)->get();
 
-        if ($article->isMain === self::MAIN_ARTICLE) {
-            return true;
+        foreach ($articles as $article) {
+            $article->update([
+                'is_main' => false
+            ]);
         }
     }
 
