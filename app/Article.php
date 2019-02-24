@@ -93,7 +93,13 @@ class Article extends Model
 
     public function changeIsActive($articleId)
     {
-        self::where('id', $articleId)->update(['is_active' => ! 'is_active']);
+        $article = $this->getById($articleId);
+        if($article){
+            $article->setAttribute('is_active', !$article->is_active);
+            $article->save();
+            return $article;
+        }
+        return null;
     }
 
 
