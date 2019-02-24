@@ -76,8 +76,9 @@ class ArticleController extends Controller
             $request->post('content'),
             $request->post('category_id'),
             $request->post('image'),
+            12
 //            $request->post('url'),
-            Auth::user()->id
+//            Auth::user()->id
 //            $request->post('is_active'),
 //            $request->post('is_main')
         );
