@@ -64,7 +64,7 @@ class Article extends Model
                 'content' => $content,
                 'category_id' => $categoryId,
                 'image' => $image,
-                'user_id' => $userId,
+                'user_update_id' => $userId,
             ]);
     }
 
