@@ -176,10 +176,12 @@ class Article extends Model
     {
         $articles = self::where('is_main', '=', true)->get();
 
-        foreach ($articles as $article) {
-            $article->update([
-                'is_main' => false
-            ]);
+        if($articles) {
+            foreach ($articles as $article) {
+                $article->update([
+                    'is_main' => false
+                ]);
+            }
         }
     }
 
