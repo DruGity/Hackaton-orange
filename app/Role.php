@@ -21,7 +21,7 @@ class Role extends Model
                 return 'User';
                 break;
 
-            case ($roleId == self::Admin):
+            case ($roleId == self::ADMIN):
                 return 'Admin';
                 break;
     }

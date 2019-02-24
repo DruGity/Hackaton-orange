@@ -37,12 +37,6 @@ class ArticleController extends Controller
 
     public function createArticle(Request $request, Article $article)
     {
-        $validator = $request->validate([
-            'photo' => 'file|image|required'
-        ]);
-
-        $image = $request->file('image');
-
         $isMain = $request->post('is_main');
         if(isset($isMain) && $isMain == true) {
             $article->replaceIsMain();
@@ -53,8 +47,9 @@ class ArticleController extends Controller
             $request->post('content'),
             $request->post('category_id'),
             $request->post('url'),
+            $request->post('user_id'),
             Auth::user()->id,
-            $image,
+            $request->post('image'),
             $request->post('is_active'),
             $request->post('is_main')
         );

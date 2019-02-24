@@ -10,7 +10,17 @@ use Illuminate\Support\Facades\DB;
 class Article extends Model
 {
     protected $fillable = [
-        'id', 'name', 'content', 'user_create_id', 'user_update_id', 'image_public_id'
+        'id',
+        'name',
+        'content',
+        'url',
+        'category_id',
+        'is_active',
+        'is_main',
+        'user_create_id',
+        'user_update_id',
+        'image_public_id',
+        'image'
     ];
 
     public $table = 'articles';
@@ -28,10 +38,11 @@ class Article extends Model
         $userId,
         $image,
         $isActive = self::ACTIVE_ARTICLE,
-        $isMain = self::NOT_MAIN_ARTICLE
+        $isMain = self::NOT_MAIN_ARTICLE,
+        Helper $helper
     )
     {
-        $uploadImage = $this->saveImageInClouder($image);
+        $uploadImage = $helper->saveImageInClouder($image);
 
         self::create([
             'name' => $articleName,
@@ -112,11 +123,6 @@ class Article extends Model
         if ($article->isMain === self::MAIN_ARTICLE) {
             return true;
         }
-    }
-
-    public function saveImageInClouder($file)
-    {
-        return $res = Cloudder::upload($file->getPathName(), null, [], []);
     }
 
     public function category()
