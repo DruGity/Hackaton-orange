@@ -19,7 +19,6 @@ class CreateTableArticles extends Migration
 
             $table->increments('id');
             $table->string('name');
-            $table->string('preview');
             $table->text('content');
             $table->integer('category_id')->unsigned();
             $table->string('image');
