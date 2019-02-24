@@ -75,7 +75,8 @@ class Article extends Model
     {
         $articles = DB::table($this->table)
             ->orderBy($sortField, $sortType)
-            ->paginate($limit);
+            ->limit($limit);
+           /* ->paginate($limit);*/
 
         return $articles;
     }
