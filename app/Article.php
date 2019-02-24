@@ -84,7 +84,6 @@ class Article extends Model
     public function getMain()
     {
         $article = self::where('is_main', true)->first();
-        var_dump($article);die();
 
         if(!$article)
             $article = $this->getLastAddedArticle();
