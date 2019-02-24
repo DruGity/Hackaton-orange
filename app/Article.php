@@ -58,7 +58,7 @@ class Article extends Model
 
     public function updateArticle($articleId, $name, $content, $categoryId, $image,$userId)
     {
-        $article = self::where('id', $articleId)->first();
+        $article = $this->getById($articleId);
 
         if (empty($name)) {
             $name = $article->name;
