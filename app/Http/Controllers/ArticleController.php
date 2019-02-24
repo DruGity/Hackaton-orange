@@ -103,7 +103,7 @@ class ArticleController extends Controller
 
     public function deleteArticle(Request $request, Article $articleModel)
     {
-        $articleModel->deleteArticle((int)$request->post('article_id'));
+        $articleModel->deleteArticle($request->post('article_id'));
 
         return response()->json(null, 204);
     }
