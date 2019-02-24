@@ -20,6 +20,7 @@ Route::prefix('admin')->group(function () {
     Route::put('/category', 'CategoryController@updateCategory')->name('updateCategoryName')->middleware(['my.basic', 'isAdmin']);
     Route::delete('/category', 'CategoryController@deleteCategory')->name('deleteCategory')->middleware(['my.basic', 'isAdmin']);
 
+
     Route::post('/news/create', 'ArticleController@createArticle')->name('createArticle')->middleware(['my.basic', 'isAdmin']);
     Route::put('/news/update', 'ArticleController@updateArticle')->name('updateArticle')->middleware(['my.basic', 'isAdmin']);
     Route::delete('/news/delete', 'ArticleController@deleteArticle')->name('deleteArticle')->middleware(['my.basic', 'isAdmin']);
