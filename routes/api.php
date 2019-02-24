@@ -26,6 +26,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/news/delete', 'ArticleController@deleteArticle')->name('deleteArticle')->middleware(['my.basic', 'isAdmin']);
     Route::put('/news/update', 'ArticleController@updateArticle')->name('updateArticle');
     Route::delete('/news/delete', 'ArticleController@deleteArticle')->name('deleteArticle');
+    Route::delete('/news/delete/{id}', 'ArticleController@deleteArticle')->name('deleteArticle');
     Route::put('/news/update/active-status', 'ArticleController@changeIsActiveStatus')->name('changeIsActive')->middleware(['my.basic', 'isAdmin']);
 
 });
