@@ -64,7 +64,7 @@ class ArticleController extends Controller
         return response()->json(['message' => 'Article successfully added!'], 201);
     }
 
-    public static function updateArticle(Request $request, Article $article)
+    public function updateArticle(Request $request, Article $article)
     {
         $isMain = $request->post('is_main');
         if(isset($isMain) && $isMain == true) {
@@ -81,6 +81,13 @@ class ArticleController extends Controller
             $request->post('is_active'),
             $request->post('is_main')
         );
+    }
+
+    public function changeIsActiveStatus(Request $request, Article $articleModel)
+    {
+        $articleModel->changeIsActive($request->post('article_id'));
+
+        return response()->json('Status successfully changed!', 200);
     }
 
     public function deleteArticle(Request $request, Article $articleModel)
