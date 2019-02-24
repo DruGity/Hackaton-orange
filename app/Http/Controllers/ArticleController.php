@@ -35,6 +35,15 @@ class ArticleController extends Controller
         return response()->json($article, 200);
     }
 
+    public function getMain(Article $articleModel)
+    {
+        $article = $articleModel->getMain();
+        if($article){
+            return response()->json($article, 200);
+        }
+        return response()->json(null, 200);
+    }
+
     public function getArticleByUrl($url, Article $articleModel)
     {
         $article = $articleModel->getByUrl($url);

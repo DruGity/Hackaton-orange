@@ -81,6 +81,16 @@ class Article extends Model
             ]);
     }
 
+    public function getMain()
+    {
+        $article = self::where('is_main', true)
+            ->first();
+        if(!$article)
+            $article = $this->getLastAddedArticle();
+
+        return $article;
+    }
+
     public function changeIsActive($articleId)
     {
         self::where('id', $articleId)->update(['is_active' => ! 'is_active']);
@@ -110,6 +120,12 @@ class Article extends Model
     {
         return self::where('category_id', '=', $category->id)
             ->get();
+    }
+
+    public function getLastAddedArticle()
+    {
+        return self::select('*')->sortBy('desc')
+            ->limit(1)->get();
     }
 
     public function getById($articleId)

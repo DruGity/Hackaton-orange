@@ -39,6 +39,7 @@ Route::get('/categories', 'CategoryController@all')->name('getAllCategories');
 Route::get('/news', 'ArticleController@getArticles')->name('getArticles');
 Route::get('/news/by-cat/{id}', 'ArticleController@getArticlesByCategory');
 Route::get('/news/{url}', 'ArticleController@getArticleByUrl')->name('getArticleByUrl');
+RouteL::get('/news/main', 'ArticleController@getMain');
 Route::post('/news/main', 'ArticleController@setIsMain')->name('setIsMain');
 
 
