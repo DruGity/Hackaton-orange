@@ -55,10 +55,11 @@ class ArticleController extends Controller
             $request->post('content'),
             $request->post('category_id'),
             $request->post('url'),
-            Auth::user()->id,
+            null,
+//            Auth::user()->id,
             $request->post('image'),
-            $request->post('is_active'),
-            $request->post('is_main')
+            true,
+            false
         );
 
         return response()->json(['message' => 'Article successfully added!'], 201);
