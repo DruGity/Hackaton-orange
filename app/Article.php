@@ -58,8 +58,25 @@ class Article extends Model
 
     public function updateArticle($articleId, $name, $content, $categoryId, $image, $url, $userId, $isActive, $isMain)
     {
-        self::where('id', $articleId)
-            ->update([
+        $article = self::where('id', $articleId)->first();
+
+        if (! $name && empty($name)) {
+            $name = $article->name;
+        }
+
+        if (! $content && empty($content)) {
+            $content = $article->content;
+        }
+
+        if (! $image && empty($image)) {
+            $image = $article->image;
+        }
+
+        if (! $url && empty($url)) {
+            $url = $article->url;
+        }
+
+        $article->update([
                 'name' => $name,
                 'content' => $content,
                 'category_id' => $categoryId,
