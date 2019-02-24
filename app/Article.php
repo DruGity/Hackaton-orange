@@ -108,6 +108,13 @@ class Article extends Model
             ->get();
     }
 
+    public function getByUrl($url)
+    {
+        return self::with('user')
+            ->where('url', $url)
+            ->get();
+    }
+
     public function checkForIsMain($articleId)
     {
         $article = self::find('id', $articleId);
