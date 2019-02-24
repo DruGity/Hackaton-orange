@@ -37,7 +37,7 @@ class User extends Authenticatable
     {
         $uploadImage = CloudinaryHelper::saveImageInClouder($image);
 
-        return self::create([
+        return $user = self::create([
             'email' => $email,
             'password' => $password,
             'name' => $name,
