@@ -35,6 +35,12 @@ class Role extends Model
         }
     }
 
+    public static function checkIsUser($roleId)
+    {
+        if ($roleId == self::USER) {
+            return true;
+        }
+    }
 
     public function users()
     {

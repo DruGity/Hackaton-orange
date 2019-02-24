@@ -27,7 +27,7 @@ use Illuminate\Http\Request;
 
 /*CLIENT routes*/
 Route::get('/user/get/{id}', 'UserController@getById')->name('getUserById');
-Route::post('/user/register', 'AuthController@registerUser')->name('registerUser')->middleware(['user.exist']);
+Route::post('/user/register', 'AuthController@registerUser')->name('registerUser')->middleware(['my.basic', 'user.exist']);
 
 /*Category routes*/
 Route::get('/categories', 'CategoryController@all')->name('getAllCategories');
