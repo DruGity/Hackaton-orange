@@ -123,6 +123,16 @@ class Article extends Model
         return $articles;
     }
 
+
+    public function getAllArticles($sortField, $sortType, $limit)
+    {
+        $articles = DB::table($this->table)
+            ->orderBy($sortField, $sortType)
+            ->limit($limit)->get();
+
+        return $articles;
+    }
+
     public function getArticlesByCategory(Category $category)
     {
         return self::where('category_id', '=', $category->id)
