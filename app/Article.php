@@ -56,7 +56,7 @@ class Article extends Model
         ]);
     }
 
-    public function updateArticle($articleId, $name, $content, $categoryId, $image, $url, $userId, $isActive, $isMain)
+    public function updateArticle($articleId, $name, $content, $categoryId, $image,$userId)
     {
         self::where('id', $articleId)
             ->update([
@@ -64,10 +64,7 @@ class Article extends Model
                 'content' => $content,
                 'category_id' => $categoryId,
                 'image' => $image,
-                'url' => $url,
                 'user_id' => $userId,
-                'is_active' => $isActive,
-                'is_main' => $isMain
             ]);
     }
 
