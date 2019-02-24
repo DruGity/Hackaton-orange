@@ -101,10 +101,9 @@ class ArticleController extends Controller
         return response()->json('Status successfully changed!', 200);
     }
 
-    public function deleteArticle(Request $request, Article $articleModel)
+    public function deleteArticle($articleId,Request $request, Article $articleModel)
     {
-        $id = $request->post('article_id');
-        var_dump($id);die();
+        $id = $articleId;
         $articleModel->deleteArticle($id);
 
         return response()->json(null, 204);
