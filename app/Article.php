@@ -153,10 +153,13 @@ class Article extends Model
     {
         $this->replaceIsMain();
         $article = self::find($id);
-        $article->update([
-            'is_main' => true
-        ]);
+        if($article) {
+            $article->update([
+                'is_main' => true
+            ]);
 
-        return $article;
+            return $article;
+        }
+        return null;
     }
 }
