@@ -103,7 +103,9 @@ class ArticleController extends Controller
 
     public function deleteArticle(Request $request, Article $articleModel)
     {
-        $articleModel->deleteArticle($request->post('article_id'));
+        $id = $request->post('article_id');
+        var_dump($id);die();
+        $articleModel->deleteArticle($id);
 
         return response()->json(null, 204);
     }
