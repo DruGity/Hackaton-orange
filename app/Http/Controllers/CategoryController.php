@@ -34,7 +34,7 @@ class CategoryController extends Controller
     {
         $category = $categoryModel->createCategory(
             $request->post('name'),
-            Auth::user()->id
+            null
         );
 
         return response()->json($category, 201);
@@ -45,7 +45,7 @@ class CategoryController extends Controller
         $category = $categoryModel->updateCategory(
             $request->post('category_id'),
             $request->post('name'),
-            Auth::user()->id
+            null
         );
 
         return response()->json($category, 200);
