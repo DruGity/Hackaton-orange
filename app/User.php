@@ -35,11 +35,7 @@ class User extends Authenticatable
 
     public function createUser($email, $password, $name, $image, $roleId = Role::USER)
     {
-        if (empty($image)) {
-            $uploadImage = CloudinaryHelper::saveImageInClouder(self::DEFAULT_USER_IMAGE_PATH);
-        } else {
-            $uploadImage = CloudinaryHelper::saveImageInClouder($image);
-        }
+        $uploadImage = CloudinaryHelper::saveImageInClouder($image);
 
         return self::create([
             'email' => $email,
