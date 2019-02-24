@@ -86,6 +86,7 @@ class ArticleController extends Controller
 
     public function updateArticle(Request $request, Article $article)
     {
+        var_dump($request->post());die();
         $isMain = $request->post('is_main');
         if(isset($isMain) && $isMain == true) {
             $article->replaceIsMain();
