@@ -91,7 +91,7 @@ class ArticleController extends Controller
             $article->replaceIsMain();
         }
         $article->updateArticle(
-            $request->post('article_id'),
+            $request->post('id'),
             $request->post('name'),
             $request->post('content'),
             $request->post('category_id'),
