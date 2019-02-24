@@ -25,6 +25,8 @@ Route::prefix('admin')->group(function () {
     Route::put('/news/update', 'ArticleController@updateArticle')->name('updateArticle');
     Route::delete('/news/delete/{id}', 'ArticleController@deleteArticle')->name('deleteArticle');
     Route::put('/news/update/active-status/{id}', 'ArticleController@changeIsActiveStatus')->name('changeIsActive');
+    Route::post('/news/update/main/{id}', 'ArticleController@setIsMain')->name('setIsMain');
+
 
 });
 
@@ -40,7 +42,6 @@ Route::get('/news', 'ArticleController@getArticles')->name('getArticles');
 Route::get('/news/by-cat/{id}', 'ArticleController@getArticlesByCategory');
 Route::get('/news/{url}', 'ArticleController@getArticleByUrl')->name('getArticleByUrl');
 Route::get('/news/get/main', 'ArticleController@getMain');
-Route::post('/news/main', 'ArticleController@setIsMain')->name('setIsMain');
 
 
 
