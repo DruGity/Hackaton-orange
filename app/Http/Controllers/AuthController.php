@@ -14,9 +14,9 @@ class AuthController extends Controller
         'password' => 'required|min:6'
     ];
 
-    public function registerUser(Request $request, User $user)
+    public function registerUser(Request $request, User $userModel)
     {
-        $user->createUser(
+        $user = $userModel->createUser(
             $request->post('email'),
             Hash::make($request->post('password')),
             $request->post('name'),

@@ -13,6 +13,6 @@ class CloudinaryHelper
 
     public static function deleteImageFromCloudinary($imagePublicId)
     {
-        Cloudder::destroyImages([$article->image_public_id], []);
+        Cloudder::destroyImages([$imagePublicId], []);
     }
 }
