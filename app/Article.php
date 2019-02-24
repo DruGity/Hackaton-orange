@@ -124,7 +124,7 @@ class Article extends Model
 
     public function getLastAddedArticle()
     {
-        return self::select('*')->sortBy('desc')
+        return self::select('*')->orderBy('desc')
             ->limit(1)->get();
     }
 
