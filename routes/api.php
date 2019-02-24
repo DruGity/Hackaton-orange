@@ -21,6 +21,7 @@ Route::prefix('admin')->group(function () {
     Route::delete('/category', 'CategoryController@deleteCategory')->name('deleteCategory')->middleware(['my.basic', 'isAdmin']);
 
 
+    Route::get('/news', 'ArticleController@getAllArticles');
     Route::post('/news/create', 'ArticleController@createArticle')->name('createArticle');
     Route::put('/news/update', 'ArticleController@updateArticle')->name('updateArticle');
     Route::delete('/news/delete/{id}', 'ArticleController@deleteArticle')->name('deleteArticle');
