@@ -29,8 +29,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function createUser($email, $password, $name, $roleId = Role::USER, $image, Helper $helper)
+    public function createUser($email, $password, $name, $image, $roleId = Role::USER)
     {
+        $helper = new Helper();
         $uploadImage = $helper->saveImageInClouder($image);
 
         return self::create([
@@ -106,9 +107,9 @@ class User extends Authenticatable
 
     public static function checkForExist($email)
     {
-        $users = self::getAll();
+        $users = new self();
 
-        foreach ($users as $user) {
+        foreach ($users->All() as $user) {
             if ($user->email == $email) {
                 return true;
             }
