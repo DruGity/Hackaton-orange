@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id'
+        'name', 'email', 'password', 'role_id', 'image', 'image_public_id'
     ];
 
     /**
@@ -29,9 +29,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function createUser($email, $password, $name, $roleId = Role::USER)
+    public function createUser($email, $password, $name, $roleId = Role::USER, $image, Helper $helper)
     {
-        return self::create(['email' => $email, 'password' => $password, 'name' => $name, 'role_id' => $roleId]);
+        $uploadImage = $helper->saveImageInClouder($image);
+
+        return self::create([
+            'email' => $email,
+            'password' => $password,
+            'name' => $name,
+            'role_id' => $roleId,
+            'image' => $uploadImage->getResult()['url'],
+            'image_public_id' => $uploadImage->getResult()['public_id']
+        ]);
     }
 
     public function setRole($userId, $roleId)
@@ -93,5 +102,16 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public static function checkForExist($email)
+    {
+        $users = self::getAll();
+
+        foreach ($users as $user) {
+            if ($user->email == $email) {
+                return true;
+            }
+        }
     }
 }
